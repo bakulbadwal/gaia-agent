@@ -1,0 +1,219 @@
+{
+  "run_id": "fixture-eval-no-web-1",
+  "config": {
+    "model": "fixture/fake-model-8b",
+    "disabled_tools": [
+      "web_search",
+      "visit_webpage"
+    ],
+    "arch": "single",
+    "verify": false
+  },
+  "set": "practice",
+  "items": [
+    {
+      "id": "practice-01",
+      "answer": "444",
+      "gold": "444",
+      "format": "string",
+      "skills": [
+        "arithmetic"
+      ],
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 66.2,
+      "steps": 6,
+      "input_tokens": 14115,
+      "output_tokens": 1371,
+      "error": null
+    },
+    {
+      "id": "practice-02",
+      "answer": "PX-71",
+      "gold": "PX-17",
+      "format": "number",
+      "skills": [
+        "file"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 13.9,
+      "steps": 3,
+      "input_tokens": 12638,
+      "output_tokens": 1216,
+      "error": null
+    },
+    {
+      "id": "practice-03",
+      "answer": "8642",
+      "gold": "8642",
+      "format": "string",
+      "skills": [
+        "web"
+      ],
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 32.8,
+      "steps": 5,
+      "input_tokens": 16354,
+      "output_tokens": 448,
+      "error": null
+    },
+    {
+      "id": "practice-04",
+      "answer": "13",
+      "gold": "31",
+      "format": "number",
+      "skills": [
+        "wikipedia"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 66.1,
+      "steps": 7,
+      "input_tokens": 10009,
+      "output_tokens": 616,
+      "error": null
+    },
+    {
+      "id": "practice-05",
+      "answer": "14",
+      "gold": "14",
+      "format": "string",
+      "skills": [
+        "web",
+        "counting"
+      ],
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 66.9,
+      "steps": 8,
+      "input_tokens": 10497,
+      "output_tokens": 1257,
+      "error": null
+    },
+    {
+      "id": "practice-06",
+      "answer": "1205.25",
+      "gold": "905.25",
+      "format": "number",
+      "skills": [
+        "file",
+        "arithmetic"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 15.5,
+      "steps": 8,
+      "input_tokens": 11334,
+      "output_tokens": 758,
+      "error": null
+    },
+    {
+      "id": "practice-07",
+      "answer": "27",
+      "gold": "23",
+      "format": "string",
+      "skills": [
+        "wikipedia",
+        "as_of"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 32.4,
+      "steps": 7,
+      "input_tokens": 19232,
+      "output_tokens": 994,
+      "error": null
+    },
+    {
+      "id": "practice-08",
+      "answer": "Room Copper",
+      "gold": "Room Cobalt",
+      "format": "number",
+      "skills": [
+        "audio"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 6.3,
+      "steps": 9,
+      "input_tokens": 29663,
+      "output_tokens": 1049,
+      "error": null
+    },
+    {
+      "id": "practice-09",
+      "answer": "1975",
+      "gold": "1957",
+      "format": "string",
+      "skills": [
+        "web"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 26.5,
+      "steps": 6,
+      "input_tokens": 6592,
+      "output_tokens": 1087,
+      "error": null
+    },
+    {
+      "id": "practice-10",
+      "answer": "Thursday",
+      "gold": "Tuesday",
+      "format": "number",
+      "skills": [
+        "vision"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 69.0,
+      "steps": 5,
+      "input_tokens": 8106,
+      "output_tokens": 531,
+      "error": null
+    },
+    {
+      "id": "practice-11",
+      "answer": "11",
+      "gold": "9",
+      "format": "string",
+      "skills": [
+        "wikipedia",
+        "counting"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 22.3,
+      "steps": 2,
+      "input_tokens": 9433,
+      "output_tokens": 472,
+      "error": null
+    },
+    {
+      "id": "practice-12",
+      "answer": "4",
+      "gold": "5",
+      "format": "number",
+      "skills": [
+        "video"
+      ],
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 54.1,
+      "steps": 8,
+      "input_tokens": 11949,
+      "output_tokens": 853,
+      "error": null
+    }
+  ],
+  "summary": {
+    "n": 12,
+    "correct": 3,
+    "accuracy": 0.25,
+    "mean_seconds": 39.333333333333336,
+    "mean_steps": 6.166666666666667,
+    "total_tokens": 170574
+  }
+}

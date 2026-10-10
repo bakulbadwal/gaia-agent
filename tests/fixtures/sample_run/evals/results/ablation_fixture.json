@@ -1,0 +1,62 @@
+{
+  "tag": "fixture",
+  "created": "2026-10-10T16:00:00+00:00",
+  "set": "practice",
+  "configs": [
+    {
+      "name": "baseline",
+      "run_ids": [
+        "fixture-eval-baseline-1",
+        "fixture-eval-baseline-2",
+        "fixture-eval-baseline-3"
+      ],
+      "status": "ok"
+    },
+    {
+      "name": "no_web",
+      "run_ids": [
+        "fixture-eval-no-web-1"
+      ],
+      "status": "ok",
+      "vs_baseline": {
+        "shared_tasks": 12,
+        "mcnemar_p": 0.008
+      }
+    },
+    {
+      "name": "no_wiki",
+      "run_ids": [
+        "fixture-eval-no-wiki-1"
+      ],
+      "status": "ok",
+      "vs_baseline": {
+        "shared_tasks": 12,
+        "mcnemar_p": 0.07
+      }
+    },
+    {
+      "name": "multi",
+      "run_ids": [
+        "fixture-eval-multi-1",
+        "fixture-eval-multi-2"
+      ],
+      "status": "ok",
+      "vs_baseline": {
+        "shared_tasks": 12,
+        "mcnemar_p": 1.0
+      }
+    },
+    {
+      "name": "verify",
+      "run_ids": [
+        "fixture-eval-verify-1",
+        "fixture-eval-verify-2"
+      ],
+      "status": "ok",
+      "vs_baseline": {
+        "shared_tasks": 12,
+        "mcnemar_p": 0.29
+      }
+    }
+  ]
+}

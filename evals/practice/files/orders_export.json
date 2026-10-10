@@ -1,0 +1,553 @@
+{
+  "exported_at": "2026-09-30T23:59:00Z",
+  "currency": "GBP",
+  "orders": [
+    {
+      "order_id": "SO-5100",
+      "customer": {
+        "first": "Sofia",
+        "last": "Brun",
+        "email": "sofia.brun@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "CHAIR-07",
+          "qty": 2,
+          "unit_price": 189.5
+        },
+        {
+          "sku": "MAT-03",
+          "qty": 3,
+          "unit_price": 22.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5101",
+      "customer": {
+        "first": "Marta",
+        "last": "Silva",
+        "email": "marta.silva@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "DESK-01",
+          "qty": 2,
+          "unit_price": 249.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5102",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "DESK-01",
+          "qty": 1,
+          "unit_price": 249.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5103",
+      "customer": {
+        "first": "Sofia",
+        "last": "Brun",
+        "email": "sofia.brun@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "MAT-03",
+          "qty": 3,
+          "unit_price": 22.0
+        },
+        {
+          "sku": "CHAIR-07",
+          "qty": 3,
+          "unit_price": 189.5
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5104",
+      "customer": {
+        "first": "Lena",
+        "last": "Vogel",
+        "email": "lena.vogel@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "DESK-01",
+          "qty": 1,
+          "unit_price": 249.0
+        },
+        {
+          "sku": "LAMP-02",
+          "qty": 1,
+          "unit_price": 39.99
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5105",
+      "customer": {
+        "first": "Raj",
+        "last": "Iyer",
+        "email": "raj.iyer@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "SHELF-11",
+          "qty": 1,
+          "unit_price": 74.25
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5106",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "MAT-03",
+          "qty": 1,
+          "unit_price": 22.0
+        },
+        {
+          "sku": "CHAIR-07",
+          "qty": 1,
+          "unit_price": 189.5
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5107",
+      "customer": {
+        "first": "Owen",
+        "last": "Pryce",
+        "email": "owen.pryce@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "LAMP-02",
+          "qty": 3,
+          "unit_price": 39.99
+        },
+        {
+          "sku": "DESK-01",
+          "qty": 1,
+          "unit_price": 249.0
+        },
+        {
+          "sku": "MAT-03",
+          "qty": 3,
+          "unit_price": 22.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5108",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "MAT-03",
+          "qty": 1,
+          "unit_price": 22.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5109",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "LAMP-02",
+          "qty": 3,
+          "unit_price": 39.99
+        },
+        {
+          "sku": "SHELF-11",
+          "qty": 2,
+          "unit_price": 74.25
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5110",
+      "customer": {
+        "first": "Raj",
+        "last": "Iyer",
+        "email": "raj.iyer@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "MAT-03",
+          "qty": 3,
+          "unit_price": 22.0
+        },
+        {
+          "sku": "SHELF-11",
+          "qty": 2,
+          "unit_price": 74.25
+        },
+        {
+          "sku": "DESK-01",
+          "qty": 3,
+          "unit_price": 249.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5111",
+      "customer": {
+        "first": "Lena",
+        "last": "Vogel",
+        "email": "lena.vogel@example.org"
+      },
+      "status": "cancelled",
+      "items": [
+        {
+          "sku": "CHAIR-07",
+          "qty": 1,
+          "unit_price": 189.5
+        },
+        {
+          "sku": "DESK-01",
+          "qty": 3,
+          "unit_price": 249.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5112",
+      "customer": {
+        "first": "Lena",
+        "last": "Vogel",
+        "email": "lena.vogel@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "MAT-03",
+          "qty": 3,
+          "unit_price": 22.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5113",
+      "customer": {
+        "first": "Raj",
+        "last": "Iyer",
+        "email": "raj.iyer@example.org"
+      },
+      "status": "refunded",
+      "items": [
+        {
+          "sku": "DESK-01",
+          "qty": 2,
+          "unit_price": 249.0
+        },
+        {
+          "sku": "CHAIR-07",
+          "qty": 3,
+          "unit_price": 189.5
+        },
+        {
+          "sku": "MAT-03",
+          "qty": 3,
+          "unit_price": 22.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5114",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "MAT-03",
+          "qty": 3,
+          "unit_price": 22.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5115",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "cancelled",
+      "items": [
+        {
+          "sku": "SHELF-11",
+          "qty": 2,
+          "unit_price": 74.25
+        },
+        {
+          "sku": "DESK-01",
+          "qty": 3,
+          "unit_price": 249.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5116",
+      "customer": {
+        "first": "Marta",
+        "last": "Silva",
+        "email": "marta.silva@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "SHELF-11",
+          "qty": 1,
+          "unit_price": 74.25
+        },
+        {
+          "sku": "LAMP-02",
+          "qty": 1,
+          "unit_price": 39.99
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5117",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "DESK-01",
+          "qty": 3,
+          "unit_price": 249.0
+        },
+        {
+          "sku": "CHAIR-07",
+          "qty": 2,
+          "unit_price": 189.5
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5118",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "LAMP-02",
+          "qty": 1,
+          "unit_price": 39.99
+        },
+        {
+          "sku": "SHELF-11",
+          "qty": 2,
+          "unit_price": 74.25
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5119",
+      "customer": {
+        "first": "Sofia",
+        "last": "Brun",
+        "email": "sofia.brun@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "MAT-03",
+          "qty": 3,
+          "unit_price": 22.0
+        },
+        {
+          "sku": "DESK-01",
+          "qty": 3,
+          "unit_price": 249.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5120",
+      "customer": {
+        "first": "Sofia",
+        "last": "Brun",
+        "email": "sofia.brun@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "DESK-01",
+          "qty": 1,
+          "unit_price": 249.0
+        },
+        {
+          "sku": "SHELF-11",
+          "qty": 1,
+          "unit_price": 74.25
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5121",
+      "customer": {
+        "first": "Lena",
+        "last": "Vogel",
+        "email": "lena.vogel@example.org"
+      },
+      "status": "pending",
+      "items": [
+        {
+          "sku": "LAMP-02",
+          "qty": 2,
+          "unit_price": 39.99
+        },
+        {
+          "sku": "MAT-03",
+          "qty": 1,
+          "unit_price": 22.0
+        },
+        {
+          "sku": "CHAIR-07",
+          "qty": 3,
+          "unit_price": 189.5
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5122",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "CHAIR-07",
+          "qty": 3,
+          "unit_price": 189.5
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5123",
+      "customer": {
+        "first": "Raj",
+        "last": "Iyer",
+        "email": "raj.iyer@example.org"
+      },
+      "status": "refunded",
+      "items": [
+        {
+          "sku": "CHAIR-07",
+          "qty": 1,
+          "unit_price": 189.5
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5124",
+      "customer": {
+        "first": "Raj",
+        "last": "Iyer",
+        "email": "raj.iyer@example.org"
+      },
+      "status": "cancelled",
+      "items": [
+        {
+          "sku": "LAMP-02",
+          "qty": 2,
+          "unit_price": 39.99
+        },
+        {
+          "sku": "DESK-01",
+          "qty": 3,
+          "unit_price": 249.0
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5125",
+      "customer": {
+        "first": "Theo",
+        "last": "Nakamura",
+        "email": "theo.nakamura@example.org"
+      },
+      "status": "shipped",
+      "items": [
+        {
+          "sku": "MAT-03",
+          "qty": 2,
+          "unit_price": 22.0
+        },
+        {
+          "sku": "CHAIR-07",
+          "qty": 3,
+          "unit_price": 189.5
+        }
+      ]
+    },
+    {
+      "order_id": "SO-5190",
+      "customer": {
+        "first": "Owen",
+        "last": "Pryce",
+        "email": "owen.pryce@example.org"
+      },
+      "status": "cancelled",
+      "items": [
+        {
+          "sku": "DESK-01",
+          "qty": 16,
+          "unit_price": 249.0
+        },
+        {
+          "sku": "CHAIR-07",
+          "qty": 2,
+          "unit_price": 189.5
+        }
+      ]
+    }
+  ]
+}

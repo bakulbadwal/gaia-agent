@@ -1,0 +1,145 @@
+timestamp,station,pm25_ugm3
+2026-01-20T00:00,Harbour Road,29.9
+2026-01-20T00:00,Kingsway,34.0
+2026-01-20T00:00,Mill Lane,20.3
+2026-01-20T00:00,Northgate,27.5
+2026-01-20T00:00,Riverside Park,7.3
+2026-01-20T00:00,Station Square,22.1
+2026-01-20T01:00,Harbour Road,
+2026-01-20T01:00,Kingsway,21.8
+2026-01-20T01:00,Mill Lane,16.4
+2026-01-20T01:00,Northgate,19.7
+2026-01-20T01:00,Riverside Park,12.2
+2026-01-20T01:00,Station Square,29.0
+2026-01-20T02:00,Harbour Road,
+2026-01-20T02:00,Kingsway,23.7
+2026-01-20T02:00,Mill Lane,13.8
+2026-01-20T02:00,Northgate,
+2026-01-20T02:00,Riverside Park,13.6
+2026-01-20T02:00,Station Square,21.5
+2026-01-20T03:00,Harbour Road,27.5
+2026-01-20T03:00,Kingsway,23.8
+2026-01-20T03:00,Mill Lane,18.0
+2026-01-20T03:00,Northgate,20.5
+2026-01-20T03:00,Riverside Park,15.8
+2026-01-20T03:00,Station Square,30.4
+2026-01-20T04:00,Harbour Road,
+2026-01-20T04:00,Kingsway,22.7
+2026-01-20T04:00,Mill Lane,14.8
+2026-01-20T04:00,Northgate,26.3
+2026-01-20T04:00,Riverside Park,12.2
+2026-01-20T04:00,Station Square,26.0
+2026-01-20T05:00,Harbour Road,28.2
+2026-01-20T05:00,Kingsway,22.4
+2026-01-20T05:00,Mill Lane,18.8
+2026-01-20T05:00,Northgate,20.3
+2026-01-20T05:00,Riverside Park,15.2
+2026-01-20T05:00,Station Square,31.1
+2026-01-20T06:00,Harbour Road,
+2026-01-20T06:00,Kingsway,23.5
+2026-01-20T06:00,Mill Lane,17.1
+2026-01-20T06:00,Northgate,19.6
+2026-01-20T06:00,Riverside Park,8.3
+2026-01-20T06:00,Station Square,34.3
+2026-01-20T07:00,Harbour Road,28.3
+2026-01-20T07:00,Kingsway,23.1
+2026-01-20T07:00,Mill Lane,19.2
+2026-01-20T07:00,Northgate,21.4
+2026-01-20T07:00,Riverside Park,15.2
+2026-01-20T07:00,Station Square,33.2
+2026-01-20T08:00,Harbour Road,34.0
+2026-01-20T08:00,Kingsway,24.3
+2026-01-20T08:00,Mill Lane,17.4
+2026-01-20T08:00,Northgate,18.2
+2026-01-20T08:00,Riverside Park,8.5
+2026-01-20T08:00,Station Square,27.9
+2026-01-20T09:00,Harbour Road,26.5
+2026-01-20T09:00,Kingsway,24.3
+2026-01-20T09:00,Mill Lane,17.9
+2026-01-20T09:00,Northgate,22.0
+2026-01-20T09:00,Riverside Park,12.5
+2026-01-20T09:00,Station Square,27.4
+2026-01-20T10:00,Harbour Road,36.8
+2026-01-20T10:00,Kingsway,
+2026-01-20T10:00,Mill Lane,19.8
+2026-01-20T10:00,Northgate,19.1
+2026-01-20T10:00,Riverside Park,12.3
+2026-01-20T10:00,Station Square,24.9
+2026-01-20T11:00,Harbour Road,33.0
+2026-01-20T11:00,Kingsway,24.3
+2026-01-20T11:00,Mill Lane,19.7
+2026-01-20T11:00,Northgate,20.5
+2026-01-20T11:00,Riverside Park,16.6
+2026-01-20T11:00,Station Square,28.6
+2026-01-20T12:00,Harbour Road,28.8
+2026-01-20T12:00,Kingsway,27.8
+2026-01-20T12:00,Mill Lane,22.8
+2026-01-20T12:00,Northgate,22.8
+2026-01-20T12:00,Riverside Park,10.9
+2026-01-20T12:00,Station Square,26.9
+2026-01-20T13:00,Harbour Road,25.8
+2026-01-20T13:00,Kingsway,21.3
+2026-01-20T13:00,Mill Lane,20.1
+2026-01-20T13:00,Northgate,21.9
+2026-01-20T13:00,Riverside Park,11.2
+2026-01-20T13:00,Station Square,28.0
+2026-01-20T14:00,Harbour Road,35.8
+2026-01-20T14:00,Kingsway,19.0
+2026-01-20T14:00,Mill Lane,18.8
+2026-01-20T14:00,Northgate,22.7
+2026-01-20T14:00,Riverside Park,11.7
+2026-01-20T14:00,Station Square,25.3
+2026-01-20T15:00,Harbour Road,
+2026-01-20T15:00,Kingsway,21.9
+2026-01-20T15:00,Mill Lane,16.7
+2026-01-20T15:00,Northgate,18.3
+2026-01-20T15:00,Riverside Park,7.1
+2026-01-20T15:00,Station Square,29.9
+2026-01-20T16:00,Harbour Road,30.0
+2026-01-20T16:00,Kingsway,28.8
+2026-01-20T16:00,Mill Lane,18.8
+2026-01-20T16:00,Northgate,17.5
+2026-01-20T16:00,Riverside Park,12.8
+2026-01-20T16:00,Station Square,26.9
+2026-01-20T17:00,Harbour Road,
+2026-01-20T17:00,Kingsway,21.0
+2026-01-20T17:00,Mill Lane,16.4
+2026-01-20T17:00,Northgate,18.1
+2026-01-20T17:00,Riverside Park,11.5
+2026-01-20T17:00,Station Square,28.2
+2026-01-20T18:00,Harbour Road,32.8
+2026-01-20T18:00,Kingsway,25.5
+2026-01-20T18:00,Mill Lane,23.1
+2026-01-20T18:00,Northgate,
+2026-01-20T18:00,Riverside Park,14.9
+2026-01-20T18:00,Station Square,29.3
+2026-01-20T19:00,Harbour Road,
+2026-01-20T19:00,Kingsway,22.7
+2026-01-20T19:00,Mill Lane,20.0
+2026-01-20T19:00,Northgate,23.2
+2026-01-20T19:00,Riverside Park,14.6
+2026-01-20T19:00,Station Square,27.1
+2026-01-20T20:00,Harbour Road,
+2026-01-20T20:00,Kingsway,26.7
+2026-01-20T20:00,Mill Lane,18.5
+2026-01-20T20:00,Northgate,20.9
+2026-01-20T20:00,Riverside Park,9.5
+2026-01-20T20:00,Station Square,34.8
+2026-01-20T21:00,Harbour Road,36.2
+2026-01-20T21:00,Kingsway,26.7
+2026-01-20T21:00,Mill Lane,15.7
+2026-01-20T21:00,Northgate,22.4
+2026-01-20T21:00,Riverside Park,16.1
+2026-01-20T21:00,Station Square,29.7
+2026-01-20T22:00,Harbour Road,
+2026-01-20T22:00,Kingsway,25.0
+2026-01-20T22:00,Mill Lane,21.9
+2026-01-20T22:00,Northgate,19.3
+2026-01-20T22:00,Riverside Park,11.0
+2026-01-20T22:00,Station Square,27.0
+2026-01-20T23:00,Harbour Road,30.3
+2026-01-20T23:00,Kingsway,25.9
+2026-01-20T23:00,Mill Lane,21.3
+2026-01-20T23:00,Northgate,12.8
+2026-01-20T23:00,Riverside Park,10.2
+2026-01-20T23:00,Station Square,22.6

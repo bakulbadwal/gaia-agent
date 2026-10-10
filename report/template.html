@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<meta property="og:title" content="{{PROJECT}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316171a'/%3E%3Ctext x='16' y='21.5' text-anchor='middle' font-family='monospace' font-weight='700' font-size='15' fill='%23f7f6f2'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+<script>
+  /* Apply a remembered theme before first paint. Storage can be unavailable; that is fine. */
+  try { var t = localStorage.getItem("gaia-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+</script>
+</head>
+<body class="{{BODY_CLASS}}">
+<a class="skip" href="#main">Skip to content</a>
+<div class="fixture-banner" id="fixture-banner" hidden>
+  <strong>FIXTURE DATA</strong> · an invented sample run used to develop this page. These are not results.
+</div>
+<div class="fixture-banner private-banner" id="private-banner" hidden>
+  <strong>PRIVATE BUILD</strong> · contains GAIA question text and answers. For local use only; do not publish.
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#overview" aria-label="{{PROJECT}}, top of page"><span class="brand-mark" aria-hidden="true">G</span><span class="brand-text">GAIA Agent</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#practice">Practice</a>
+      <a href="#trajectory">Trajectories</a>
+      <a href="#evals">Evals</a>
+      <a href="#questions">GAIA run</a>
+      <a href="#analytics">Analytics</a>
+      <a href="#usage">Usage</a>
+      <a href="#failures">Failures</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle colour theme" title="Toggle colour theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap" id="overview" aria-labelledby="h-overview">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Hugging Face Agents Course · Unit 4 · GAIA Level 1</span>
+        <h1 id="h-overview">{{PROJECT}}</h1>
+        <p class="pitch">{{PITCH}}</p>
+        <div class="chips" id="meta-chips"></div>
+      </div>
+      <div class="card pad score" id="scorecard" aria-live="polite"></div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section class="block wrap" id="practice" aria-labelledby="h-practice">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Practice set · our own tasks</span>
+        <h2 id="h-practice">Graded runs, every step shown</h2>
+        <p class="lede">Sixteen original GAIA-style tasks written for this project, each with a gold answer that can be checked. Because the tasks are ours, every question, answer and step of reasoning is public. Pick a run, then a task.</p>
+      </div>
+    </div>
+    <div id="practice-body"></div>
+  </section>
+
+  <section class="block wrap" id="trajectory" aria-labelledby="h-trajectory">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Trajectory viewer</span>
+        <h2 id="h-trajectory">Step by step, what the agent did</h2>
+        <p class="lede">Each step is one model call: the agent's reasoning, the Python it wrote, the tools that code called, and what came back, with timing and tokens per step. GAIA items appear as a step skeleton only.</p>
+      </div>
+    </div>
+    <div id="viewer"></div>
+  </section>
+
+  <section class="block wrap" id="evals" aria-labelledby="h-evals">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Evals</span>
+        <h2 id="h-evals">Practice-set accuracy and ablations</h2>
+        <p class="lede">Measured on the practice set with its own answer key, never on the course's GAIA questions. Repeated runs give pass@k and pass^k; ablations switch one thing off at a time.</p>
+      </div>
+    </div>
+    <div id="evals-body"></div>
+  </section>
+
+  <section class="block wrap" id="questions" aria-labelledby="h-questions">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">GAIA run · the course's 20 questions</span>
+        <h2 id="h-questions">What was submitted</h2>
+        <p class="lede" id="questions-lede">One row per course question in the submitted run.</p>
+      </div>
+    </div>
+    <div class="card pad policy" id="policy"></div>
+    <div id="scoreboard"></div>
+  </section>
+
+  <section class="block wrap" id="analytics" aria-labelledby="h-analytics">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Analytics · GAIA run</span>
+        <h2 id="h-analytics">Where the effort went</h2>
+      </div>
+    </div>
+    <div id="charts"></div>
+  </section>
+
+  <section class="block wrap" id="usage" aria-labelledby="h-usage">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Free-tier usage</span>
+        <h2 id="h-usage">Every model request, logged</h2>
+        <p class="lede">The provider layer rate-limits, retries with backoff, falls back to the next free model, and logs each request. This is what that cost, across every run.</p>
+      </div>
+    </div>
+    <div id="usage-body"></div>
+  </section>
+
+  <section class="block wrap" id="failures" aria-labelledby="h-failures">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Failure taxonomy · GAIA run</span>
+        <h2 id="h-failures">Where runs went wrong</h2>
+        <p class="lede">Each trace is scanned for failure behaviours: timeouts, rate limits, crashed code, loops, empty answers. No answer key is involved, so a tag marks a risky behaviour, not a wrong answer. Every tag links to the trajectory that earned it.</p>
+      </div>
+    </div>
+    <div id="taxonomy"></div>
+  </section>
+
+  <section class="block wrap" id="how" aria-labelledby="h-how">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">How it works</span>
+        <h2 id="h-how">Architecture</h2>
+        <p class="lede">A single smolagents CodeAgent writes Python in a loop. Tools are plain functions it calls from that code. Every run leaves answers, traces and evals on disk, and this page is built from them.</p>
+      </div>
+    </div>
+    <div class="card diagram" id="diagram"></div>
+    <div class="pillars" id="pillars"></div>
+    <div class="card pad honesty" id="honesty">
+      <h3>Honesty note</h3>
+      <ul>
+        <li><b>No answer lookups.</b> The agent solves each question with its tools. Nothing is hard-coded, and prompts are never tuned to a known answer.</li>
+        <li><b>GAIA guard.</b> The web tools refuse the GAIA dataset and known answer-dump pages, so a search cannot return the key.</li>
+        <li><b>No resharing.</b> GAIA items appear on this page as ids, counts and tags only, under the <a href="#policy">contamination policy</a>. The practice set is ours and is shown in full.</li>
+        <li><b>Free models only.</b> Free-tier or local models, no paid API spend.</li>
+        <li><b>Scores as returned.</b> The official score is the course API's response, copied verbatim. The API grades only in aggregate, so per-question rows show what was submitted, not whether it was right.</li>
+        <li><b>Small samples.</b> Twenty questions is a small sample: a 95% interval around any score is roughly ±20 points. Ablation deltas smaller than that are noise until repeated.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Built by <code>report/build_report.py</code> at <span class="num">{{GENERATED_AT}}</span>. Static HTML, no framework, no tracking.</div>
+    <div class="srcs" id="sources"></div>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip"></div>
+<script type="application/json" id="report-data">{{DATA}}</script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

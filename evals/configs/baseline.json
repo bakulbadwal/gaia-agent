@@ -1,0 +1,8 @@
+{
+  "name": "baseline",
+  "group": "reference",
+  "default": true,
+  "description": "The agent as shipped: single CodeAgent, every tool, no verifier. Model = whatever the caller's env selects.",
+  "env": {},
+  "repeats": 1
+}

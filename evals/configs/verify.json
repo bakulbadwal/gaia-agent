@@ -1,0 +1,10 @@
+{
+  "name": "verify",
+  "group": "architecture",
+  "default": true,
+  "description": "Add the answer-verification pass before the final answer is accepted.",
+  "env": {
+    "GAIA_VERIFY": "1"
+  },
+  "repeats": 1
+}

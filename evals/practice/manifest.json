@@ -1,0 +1,54 @@
+{
+  "built_for": "2026-10-10",
+  "files": {
+    "evals/practice/files/air_quality_hourly.csv": {
+      "bytes": 5016,
+      "sha256": "e56fa301ef8e8c34b7fa0becef7de9241c9be516e63ec104aecf887549306395"
+    },
+    "evals/practice/files/chess_diagram.png": {
+      "bytes": 36010,
+      "sha256": "4ea7c33851e15b02bc9831adbd5bd7b8411fc4c613b9322bd1dc293f95832110"
+    },
+    "evals/practice/files/label_cipher.py": {
+      "bytes": 310,
+      "sha256": "a07e5117aa143fe40ca72b9641cbc888537fba4d61ccf2730e0ddd2adbc87af8"
+    },
+    "evals/practice/files/library_loans.xlsx": {
+      "bytes": 6875,
+      "sha256": "609aaa78b788df317d71f346063849557240616f5580fbff1fe26b98878fbbca"
+    },
+    "evals/practice/files/orders_export.json": {
+      "bytes": 10860,
+      "sha256": "d0218f8279defc092d6201f9d7ca1e62292fc03a1458327ba9df70e9e016513b"
+    },
+    "evals/practice/files/procurement_minutes.pdf": {
+      "bytes": 1447,
+      "sha256": "43b42d1298ca53a726dc850f89ca4e152c47f816d531fa7a03bd523187eb0326"
+    },
+    "evals/practice/files/queue_sim.py": {
+      "bytes": 862,
+      "sha256": "3d62fad4877c7b64ca23766392050331e63674c27665f968a47dcacc1f3b2fc8"
+    },
+    "evals/practice/files/rainfall_chart.png": {
+      "bytes": 21667,
+      "sha256": "b4c24d5abb86d6fef27cc86f5d232a6edc26e3ef1e137793a78e4be38c9e63bd"
+    },
+    "evals/practice/files/sensor_readings.mp3": {
+      "bytes": 109316,
+      "sha256": "7b00625239e0706c81701868a595eae9b1a3fd5544816b679a4d651ec2907df5"
+    },
+    "evals/practice/files/shuttle_trips.csv": {
+      "bytes": 1998,
+      "sha256": "61f8e760a5793fb94488afd00a90209e93dafa7c29feeb60141ffa9cf7db952a"
+    },
+    "evals/practice/files/station_announcement.mp3": {
+      "bytes": 144524,
+      "sha256": "a81689cbb728c523eb05e968e264aec45753b3c3cc40e18e04467334a4bc0763"
+    },
+    "evals/practice/files/warehouse_stock.xlsx": {
+      "bytes": 6670,
+      "sha256": "37c5ea56e77e4d49e8b91646c86bc60fe60852c5d42831e22c979d2d9416ddbb"
+    }
+  },
+  "generator": "evals/practice/build_practice.py"
+}

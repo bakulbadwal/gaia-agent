@@ -1,0 +1,10 @@
+{
+  "name": "no_web",
+  "group": "tools",
+  "default": true,
+  "description": "Remove every web and Wikipedia tool. Expect the 4 Wikipedia tasks to fall to what the model remembers; file tasks should not move.",
+  "env": {
+    "GAIA_DISABLE_TOOLS": "web_search,visit_webpage,wikipedia_search,wikipedia_page,wikipedia_revision,wikipedia_page_info"
+  },
+  "repeats": 1
+}

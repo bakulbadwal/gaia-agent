@@ -1,0 +1,9 @@
+{
+  "runs": [
+    "fixture-eval-baseline-1",
+    "fixture-eval-baseline-2",
+    "fixture-eval-baseline-3"
+  ],
+  "metric": "gaia",
+  "note": "FIXTURE: not a run doc"
+}

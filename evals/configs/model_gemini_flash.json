@@ -1,0 +1,15 @@
+{
+  "name": "model_gemini_flash",
+  "group": "model",
+  "default": false,
+  "description": "Google AI Studio free tier, Gemini 2.5 Flash.",
+  "env": {
+    "GAIA_PROVIDER": "gemini"
+  },
+  "requires": {
+    "env": [
+      "GEMINI_API_KEY"
+    ]
+  },
+  "repeats": 1
+}

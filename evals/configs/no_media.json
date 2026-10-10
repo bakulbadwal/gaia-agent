@@ -1,0 +1,10 @@
+{
+  "name": "no_media",
+  "group": "tools",
+  "default": true,
+  "description": "Remove audio transcription, the vision tool and the YouTube tools. Audio and image tasks should collapse; this checks they are not solved by accident.",
+  "env": {
+    "GAIA_DISABLE_TOOLS": "transcribe_audio,image_question,youtube_transcript,youtube_audio_transcript,youtube_frames_question"
+  },
+  "repeats": 1
+}

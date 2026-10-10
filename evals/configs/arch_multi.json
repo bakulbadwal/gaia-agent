@@ -1,0 +1,10 @@
+{
+  "name": "arch_multi",
+  "group": "architecture",
+  "default": true,
+  "description": "Manager agent delegating to web and media sub-agents instead of one CodeAgent.",
+  "env": {
+    "GAIA_ARCH": "multi"
+  },
+  "repeats": 1
+}

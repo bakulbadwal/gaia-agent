@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAIA Agent — HF Agents Course Unit 4</title>
+<meta name="description" content="A smolagents CodeAgent on free models that answers GAIA Level-1 questions with web, Wikipedia, file, audio, image and video tools, and records every step it takes so each answer can be audited.">
+<meta property="og:title" content="GAIA Agent — HF Agents Course Unit 4">
+<meta property="og:description" content="A smolagents CodeAgent on free models that answers GAIA Level-1 questions with web, Wikipedia, file, audio, image and video tools, and records every step it takes so each answer can be audited.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316171a'/%3E%3Ctext x='16' y='21.5' text-anchor='middle' font-family='monospace' font-weight='700' font-size='15' fill='%23f7f6f2'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css?v=1d299b7ada">
+<script>
+  /* Apply a remembered theme before first paint. Storage can be unavailable; that is fine. */
+  try { var t = localStorage.getItem("gaia-theme"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+</script>
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to content</a>
+<div class="fixture-banner" id="fixture-banner" hidden>
+  <strong>FIXTURE DATA</strong> · an invented sample run used to develop this page. These are not results.
+</div>
+<div class="fixture-banner private-banner" id="private-banner" hidden>
+  <strong>PRIVATE BUILD</strong> · contains GAIA question text and answers. For local use only; do not publish.
+</div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#overview" aria-label="GAIA Agent — HF Agents Course Unit 4, top of page"><span class="brand-mark" aria-hidden="true">G</span><span class="brand-text">GAIA Agent</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#practice">Practice</a>
+      <a href="#trajectory">Trajectories</a>
+      <a href="#evals">Evals</a>
+      <a href="#questions">GAIA run</a>
+      <a href="#analytics">Analytics</a>
+      <a href="#usage">Usage</a>
+      <a href="#failures">Failures</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle colour theme" title="Toggle colour theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap" id="overview" aria-labelledby="h-overview">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Hugging Face Agents Course · Unit 4 · GAIA Level 1</span>
+        <h1 id="h-overview">GAIA Agent — HF Agents Course Unit 4</h1>
+        <p class="pitch">A smolagents CodeAgent on free models that answers GAIA Level-1 questions with web, Wikipedia, file, audio, image and video tools, and records every step it takes so each answer can be audited.</p>
+        <div class="chips" id="meta-chips"></div>
+      </div>
+      <div class="card pad score" id="scorecard" aria-live="polite"></div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <section class="block wrap" id="practice" aria-labelledby="h-practice">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Practice set · our own tasks</span>
+        <h2 id="h-practice">Graded runs, every step shown</h2>
+        <p class="lede">Sixteen original GAIA-style tasks written for this project, each with a gold answer that can be checked. Because the tasks are ours, every question, answer and step of reasoning is public. Pick a run, then a task.</p>
+      </div>
+    </div>
+    <div id="practice-body"></div>
+  </section>
+
+  <section class="block wrap" id="trajectory" aria-labelledby="h-trajectory">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Trajectory viewer</span>
+        <h2 id="h-trajectory">Step by step, what the agent did</h2>
+        <p class="lede">Each step is one model call: the agent's reasoning, the Python it wrote, the tools that code called, and what came back, with timing and tokens per step. GAIA items appear as a step skeleton only.</p>
+      </div>
+    </div>
+    <div id="viewer"></div>
+  </section>
+
+  <section class="block wrap" id="evals" aria-labelledby="h-evals">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Evals</span>
+        <h2 id="h-evals">Practice-set accuracy and ablations</h2>
+        <p class="lede">Measured on the practice set with its own answer key, never on the course's GAIA questions. Repeated runs give pass@k and pass^k; ablations switch one thing off at a time.</p>
+      </div>
+    </div>
+    <div id="evals-body"></div>
+  </section>
+
+  <section class="block wrap" id="questions" aria-labelledby="h-questions">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">GAIA run · the course's 20 questions</span>
+        <h2 id="h-questions">What was submitted</h2>
+        <p class="lede" id="questions-lede">One row per course question in the submitted run.</p>
+      </div>
+    </div>
+    <div class="card pad policy" id="policy"></div>
+    <div id="scoreboard"></div>
+  </section>
+
+  <section class="block wrap" id="analytics" aria-labelledby="h-analytics">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Analytics · GAIA run</span>
+        <h2 id="h-analytics">Where the effort went</h2>
+      </div>
+    </div>
+    <div id="charts"></div>
+  </section>
+
+  <section class="block wrap" id="usage" aria-labelledby="h-usage">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Free-tier usage</span>
+        <h2 id="h-usage">Every model request, logged</h2>
+        <p class="lede">The provider layer rate-limits, retries with backoff, falls back to the next free model, and logs each request. This is what that cost, across every run.</p>
+      </div>
+    </div>
+    <div id="usage-body"></div>
+  </section>
+
+  <section class="block wrap" id="failures" aria-labelledby="h-failures">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Failure taxonomy · GAIA run</span>
+        <h2 id="h-failures">Where runs went wrong</h2>
+        <p class="lede">Each trace is scanned for failure behaviours: timeouts, rate limits, crashed code, loops, empty answers. No answer key is involved, so a tag marks a risky behaviour, not a wrong answer. Every tag links to the trajectory that earned it.</p>
+      </div>
+    </div>
+    <div id="taxonomy"></div>
+  </section>
+
+  <section class="block wrap" id="how" aria-labelledby="h-how">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">How it works</span>
+        <h2 id="h-how">Architecture</h2>
+        <p class="lede">A single smolagents CodeAgent writes Python in a loop. Tools are plain functions it calls from that code. Every run leaves answers, traces and evals on disk, and this page is built from them.</p>
+      </div>
+    </div>
+    <div class="card diagram" id="diagram"></div>
+    <div class="pillars" id="pillars"></div>
+    <div class="card pad honesty" id="honesty">
+      <h3>Honesty note</h3>
+      <ul>
+        <li><b>No answer lookups.</b> The agent solves each question with its tools. Nothing is hard-coded, and prompts are never tuned to a known answer.</li>
+        <li><b>GAIA guard.</b> The web tools refuse the GAIA dataset and known answer-dump pages, so a search cannot return the key.</li>
+        <li><b>No resharing.</b> GAIA items appear on this page as ids, counts and tags only, under the <a href="#policy">contamination policy</a>. The practice set is ours and is shown in full.</li>
+        <li><b>Free models only.</b> Free-tier or local models, no paid API spend.</li>
+        <li><b>Scores as returned.</b> The official score is the course API's response, copied verbatim. The API grades only in aggregate, so per-question rows show what was submitted, not whether it was right.</li>
+        <li><b>Small samples.</b> Twenty questions is a small sample: a 95% interval around any score is roughly ±20 points. Ablation deltas smaller than that are noise until repeated.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Built by <code>report/build_report.py</code> at <span class="num">2026-10-10T17:37:18Z</span>. Static HTML, no framework, no tracking.</div>
+    <div class="srcs" id="sources"></div>
+  </div>
+</footer>
+
+<div class="tip" id="tip" role="tooltip"></div>
+<script type="application/json" id="report-data">{"meta":{"project":"GAIA Agent — HF Agents Course Unit 4","pitch":"A smolagents CodeAgent on free models that answers GAIA Level-1 questions with web, Wikipedia, file, audio, image and video tools, and records every step it takes so each answer can be audited.","generated_at":"2026-10-10T17:37:18Z","fixture":false,"public":true,"policy":"GAIA asks that its questions and answers not be reshared in a form crawlers can index, so this page never shows a GAIA question, submitted answer, model output, code or observation. Each GAIA item appears only as a short task id, its attachment type, the tools it used, step, call, token and time counts, its status and its failure tags; its trajectory is reduced to a step skeleton. The practice set is our own and is shown in full.","run_id":"smoke-gaia","model":"nvidia/nemotron-3-ultra-550b-a55b:free","provider":"openrouter","arch":"single","vision_model":"nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free","verify":null,"known_tools":["web_search","visit_webpage","wikipedia_search","wikipedia_page","wikipedia_revision","wikipedia_page_info","read_file","run_python_file","transcribe_audio","image_question","youtube_transcript","youtube_audio_transcript","youtube_frames_question"],"sources":{"answers":true,"traces":true,"submissions":false,"error_analysis":false,"evals":false,"practice_traces":false,"usage":true}},"submission":{"latest":null,"history":[],"pass_mark":30.0},"questions":[{"n":1,"task_id":"2d83110e","attachment":null,"status":"answered","error_type":null,"steps":1,"model_calls":1,"seconds":11.2,"input_tokens":4639,"output_tokens":132,"tokens":4771,"tools":{},"tags":[],"has_trace":true,"run_id":"smoke-gaia"}],"traces":{"2d83110e":{"task_id":"2d83110e","redacted":true,"run_id":"smoke-gaia","model":"nvidia/nemotron-3-ultra-550b-a55b:free","provider":"openrouter","arch":"single","started_at":"2026-10-10T17:34:20+00:00","seconds":11.2,"attachment":null,"error_type":null,"agents":["agent"],"steps":[{"index":0,"step_number":null,"type":"task","agent":"agent","is_final_answer":false,"tools":[],"error":false,"error_type":null,"images":null,"input_tokens":0,"output_tokens":0,"tokens_known":false,"duration_s":null,"sub_agents":[]},{"index":1,"step_number":1,"type":"action","agent":"agent","is_final_answer":true,"tools":[],"error":false,"error_type":null,"images":null,"input_tokens":4639,"output_tokens":132,"tokens_known":true,"duration_s":9.865,"sub_agents":[]},{"index":2,"step_number":null,"type":"final","agent":"agent","is_final_answer":false,"tools":[],"error":false,"error_type":null,"images":null,"input_tokens":0,"output_tokens":0,"tokens_known":false,"duration_s":null,"sub_agents":[]}],"totals":{"steps":1,"planning_steps":0,"input_tokens":4639,"output_tokens":132,"model_calls":1,"tool_calls_by_name":{},"step_errors":0,"sub_agent_calls":0,"token_usage_complete":true}}},"analytics":{"tool_usage":[],"status":{"answered":1,"error":0,"timeout":0,"empty":0},"seconds":{"median":11.2,"p90":11.2,"total":11.2},"steps":{"median":1.0,"max":1},"tokens":{"total":4771,"median":4771.0},"tool_calls_total":0},"errors":null,"evals":null,"practice":null,"usage":{"totals":{"requests":26,"ok":26,"failed":0,"input_tokens":98566,"output_tokens":6321,"retries":10,"fallback_served":6,"waited_s":39.1,"latency_median":9.0055,"latency_p90":19.073},"models":[{"requests":17,"ok":17,"failed":0,"input_tokens":77526,"output_tokens":3031,"retries":0,"fallback_served":0,"waited_s":0.1,"latency_median":8.7,"latency_p90":21.268,"model":"nvidia/nemotron-3-ultra-550b-a55b:free","free":true,"attempt_errors":{"empty_response":4}},{"requests":6,"ok":6,"failed":0,"input_tokens":4929,"output_tokens":1895,"retries":7,"fallback_served":3,"waited_s":31.6,"latency_median":13.4465,"latency_p90":17.8875,"model":"nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free","free":true,"attempt_errors":{"empty_response":4}},{"requests":2,"ok":2,"failed":0,"input_tokens":16007,"output_tokens":1236,"retries":2,"fallback_served":2,"waited_s":4.7,"latency_median":8.124,"latency_p90":9.3672,"model":"nvidia/nemotron-3-super-120b-a12b:free","free":true,"attempt_errors":{}},{"requests":1,"ok":1,"failed":0,"input_tokens":104,"output_tokens":159,"retries":1,"fallback_served":1,"waited_s":2.8,"latency_median":6.834,"latency_p90":6.834,"model":"dots-studio/dots-3-note-preview:free","free":true,"attempt_errors":{}},{"requests":0,"ok":0,"failed":0,"input_tokens":0,"output_tokens":0,"retries":0,"fallback_served":0,"waited_s":0.0,"latency_median":null,"latency_p90":null,"model":"google/gemma-4-31b-it:free","free":true,"attempt_errors":{"rate_limit 429":4,"upstream_rate_limit 429":4}},{"requests":0,"ok":0,"failed":0,"input_tokens":0,"output_tokens":0,"retries":0,"fallback_served":0,"waited_s":0.0,"latency_median":null,"latency_p90":null,"model":"thinkingmachines/inkling:free","free":true,"attempt_errors":{"bad_request 403":1,"forbidden 403":1,"skipped_circuit_open":1}}],"scopes":{"other":{"requests":25,"ok":25,"failed":0,"input_tokens":93927,"output_tokens":6189,"retries":10,"fallback_served":6,"waited_s":39.1,"latency_median":8.955,"latency_p90":19.2768},"gaia":{"requests":1,"ok":1,"failed":0,"input_tokens":4639,"output_tokens":132,"retries":0,"fallback_served":0,"waited_s":0.0,"latency_median":9.862,"latency_p90":9.862}},"kinds":{"text":19,"vision":7},"days":{"2026-10-10":26},"first":"2026-10-10T17:03:17+00:00","last":"2026-10-10T17:36:28+00:00","all_free":true,"non_free_models":[]}}</script>
+<script src="assets/app.js?v=c86dbfdec6" defer></script>
+</body>
+</html>

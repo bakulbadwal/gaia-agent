@@ -1,0 +1,13 @@
+{
+  "name": "model_lmstudio_local",
+  "group": "model",
+  "default": false,
+  "description": "Whatever model is loaded in a local LM Studio server (free, slow, offline).",
+  "env": {
+    "GAIA_PROVIDER": "lmstudio"
+  },
+  "requires": {
+    "url": "http://localhost:1234/v1/models"
+  },
+  "repeats": 1
+}

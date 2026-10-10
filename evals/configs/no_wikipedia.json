@@ -1,0 +1,10 @@
+{
+  "name": "no_wikipedia",
+  "group": "tools",
+  "default": true,
+  "description": "Remove only the MediaWiki-API tools; generic search + page visit remain. Measures what the dedicated Wikipedia tools buy.",
+  "env": {
+    "GAIA_DISABLE_TOOLS": "wikipedia_search,wikipedia_page,wikipedia_revision,wikipedia_page_info"
+  },
+  "repeats": 1
+}

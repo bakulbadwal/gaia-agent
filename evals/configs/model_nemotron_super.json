@@ -1,0 +1,17 @@
+{
+  "name": "model_nemotron_super",
+  "group": "model",
+  "default": false,
+  "description": "OpenRouter free Nemotron 3 Super 120B-A12B, fallbacks disabled.",
+  "env": {
+    "GAIA_PROVIDER": "openrouter",
+    "GAIA_MODEL_ID": "nvidia/nemotron-3-super-120b-a12b:free",
+    "GAIA_FALLBACKS": ""
+  },
+  "requires": {
+    "env": [
+      "OPENROUTER_API_KEY"
+    ]
+  },
+  "repeats": 1
+}

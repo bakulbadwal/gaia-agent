@@ -1,0 +1,27 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# environments / caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# raw run data: contains GAIA validation questions, task files and answers.
+# The GAIA dataset asks that its items not be reshared in crawlable form, so only
+# redacted, aggregate results are published (docs/ and results/ built by report/).
+data/
+runs/
+evals/results/raw/
+
+# large media scratch
+*.mp4
+*.webm
+*.m4a
+runs/practice_files/
+
+# course template kept locally for reference only
+reference/

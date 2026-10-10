@@ -1,0 +1,15 @@
+{
+  "name": "model_groq_gpt_oss_120b",
+  "group": "model",
+  "default": false,
+  "description": "Groq free tier, gpt-oss-120b (vision: Llama 4 Scout).",
+  "env": {
+    "GAIA_PROVIDER": "groq"
+  },
+  "requires": {
+    "env": [
+      "GROQ_API_KEY"
+    ]
+  },
+  "repeats": 1
+}
