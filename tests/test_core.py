@@ -89,6 +89,12 @@ def test_build_task_appends_file():
     assert build_task("  Q?  ", None, None) == "Q?"
 
 
+def test_missing_attachment_fails_fast():
+    # Regression for run gaia-v1: a missing file made the agent loop to max_steps hunting for it.
+    task = build_task("Q?", None, "x.xlsx")
+    assert "do not search for it" in task and "final_answer('unknown')" in task
+
+
 # ----------------------------------------------------------------------------- submit payload
 
 def _write_jsonl(path, rows):

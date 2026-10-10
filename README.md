@@ -5,7 +5,7 @@
 <!-- RESULTS:START -->
 | | |
 |---|---|
-| **Official score** (course API, 20 GAIA L1 questions) | _run in progress_ |
+| **Official score** (course API, 20 GAIA L1 questions) | **85% (17 / 20)**: the certificate bar is 30% |
 | **Practice set** (16 original tasks, 3 repeats) | _run in progress_ |
 | **Model cost** | **$0**: free OpenRouter models only, enforced in code |
 <!-- RESULTS:END -->

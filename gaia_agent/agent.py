@@ -505,7 +505,13 @@ def build_task(question: str, file_path: str | None, file_name: str | None) -> s
     if file_path:
         task += f"\n\nAttached file: {file_path}"
     elif file_name:
-        task += f"\n\n(An attached file named {file_name!r} was expected but could not be downloaded.)"
+        # Fail fast: in run gaia-v1 every question with a missing attachment burned all 12 steps
+        # hunting for the file (read_file on guessed paths, web searches for the file name).
+        task += (
+            f"\n\n(An attached file named {file_name!r} was expected but could not be downloaded. "
+            "It is NOT available anywhere: do not search for it, guess its path or try to reconstruct it. "
+            "If the question can be answered without it, do so; otherwise call final_answer('unknown') now.)"
+        )
     return task
 
 
