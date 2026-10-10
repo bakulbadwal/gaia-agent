@@ -3,7 +3,8 @@
   "runs": [
     "practice-baseline-r1",
     "practice-baseline-r2",
-    "practice-baseline-r3"
+    "practice-baseline-r3",
+    "abl-2026-10-10-baseline"
   ],
   "same_config": true,
   "config": {
@@ -13,16 +14,16 @@
     "provider": "openrouter",
     "verify": false
   },
-  "n_runs": 3,
+  "n_runs": 4,
   "run_accuracy": {
-    "mean": 0.9583,
-    "stdev": 0.0361,
+    "mean": 0.9531,
+    "stdev": 0.0312,
     "min": 0.9375,
     "max": 1.0
   },
   "table": [
     {
-      "k": 3,
+      "k": 4,
       "tasks": 16,
       "pass@k": 1.0,
       "pass^k": 0.9375
@@ -30,83 +31,83 @@
   ],
   "per_task": {
     "p01-xlsx-late-loans": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p02-xlsx-multisheet-sku": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p03-csv-evening-trips": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p04-csv-pm25-ranking": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p05-py-queue-sim": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p06-py-invert-cipher": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p07-audio-platform": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p08-audio-mean-reading": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p09-image-chess-mate": {
-      "n": 3,
+      "n": 4,
       "c": 1,
-      "p": 0.3333
+      "p": 0.25
     },
     "p10-image-chart-mean": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p11-pdf-action-items": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "p12-json-top-customer": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "w01-wiki-element-city": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "w02-wiki-architect-prize": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "w03-wiki-bolivia-borders": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     },
     "w04-wiki-mozart-river": {
-      "n": 3,
-      "c": 3,
+      "n": 4,
+      "c": 4,
       "p": 1.0
     }
   },

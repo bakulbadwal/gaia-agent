@@ -637,7 +637,9 @@ def build_evals(results: list[dict], ablation: dict | None = None) -> dict:
     groups: dict[tuple, list[dict]] = defaultdict(list)
     for r in runs:
         # Group by the ablation's config name when it has one, else by the config itself.
-        groups[(r["key"], r["name"])].append(r)
+        # A run named "baseline" by the ablation runner is the same config as the plain repeat runs
+        # (practice-baseline-r1..rK), so they pool: that is what makes pass^k computable.
+        groups[(r["key"], None if r["name"] == "baseline" else r["name"])].append(r)
 
     rows = []
     for (key, name), grs in groups.items():
@@ -1235,9 +1237,15 @@ def collect(root: Path, public: bool = True) -> dict:
     }
 
 
+def _scrub_home(s: str) -> str:
+    """Published pages show "~" instead of the builder's home directory (no local usernames/paths)."""
+    home = str(Path.home())
+    return s.replace(home, "~") if home and home != "/" else s
+
+
 def inline_json(data: Any) -> str:
     """JSON safe to embed inside <script type="application/json">."""
-    s = json.dumps(data, ensure_ascii=False, separators=(",", ":"), default=str)
+    s = _scrub_home(json.dumps(data, ensure_ascii=False, separators=(",", ":"), default=str))
     return (
         s.replace("&", "\\u0026")
         .replace("<", "\\u003c")
@@ -1294,7 +1302,7 @@ def write_practice_traces(out: Path, prac_traces: dict, practice: dict | None) -
             rel = f"{_safe_name(rid)}/{_safe_name(tid)}.json"
             path = tdir / rel
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(json.dumps(tr, ensure_ascii=False, separators=(",", ":"), default=str), encoding="utf-8")
+            path.write_text(_scrub_home(json.dumps(tr, ensure_ascii=False, separators=(",", ":"), default=str)), encoding="utf-8")
             files.setdefault(rid, {})[tid] = rel
             n += 1
     if n:

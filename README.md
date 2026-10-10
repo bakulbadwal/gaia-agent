@@ -6,11 +6,17 @@
 | | |
 |---|---|
 | **Official score** (course API, 20 GAIA L1 questions) | **85% (17 / 20)**: the certificate bar is 30% |
-| **Practice set** (16 original tasks, 3 repeats) | **95.8% mean accuracy · pass@3 100% · pass^3 93.8%** |
+| **Practice set** (16 original tasks, 4 identical runs) | **95.3% mean accuracy · pass@4 100% · pass^4 93.8%** |
 | **Model cost** | **$0**: free OpenRouter models only, enforced in code |
 <!-- RESULTS:END -->
 
 **Results site:** step-by-step replays of every practice task, tool usage, latency, failure tags and ablations: **[bakulbadwal.github.io/gaia-agent](https://bakulbadwal.github.io/gaia-agent/)**
+
+[![The results site: official score 85% (17 of 20) against a 30% pass mark, with practice accuracy, pass^4 reliability, median latency, model requests and $0 API cost](docs/media/overview.png)](https://bakulbadwal.github.io/gaia-agent/)
+
+![Three practice tasks replayed step by step: an audio transcription averaged in Python, a spreadsheet filtered with pandas, and a multi-hop Wikipedia lookup, each with the agent's code, tool output, timing and tokens per step](docs/media/trajectories.gif)
+
+*Every answer can be audited: the trajectory viewer replays each step the agent took (the Python it wrote, what each tool returned, and the time and tokens it cost), next to the gold answer.*
 
 ---
 
@@ -79,13 +85,13 @@ The course API returns only an aggregate score, so it doesn't reveal which three
 
 **Found in the traces, then fixed:** in the first pass, all 5 attachment questions failed because the course's file endpoint returns 404. Each of them burned all 12 steps hunting for a file that wasn't there. The fix was general: a missing input now tells the agent to stop and answer `unknown` (a regression test covers it). The attachments were then fetched from the GAIA dataset by exact file name, never touching its answer metadata.
 
-### Reliability: same agent, same 16 tasks, 3 runs
+### Reliability: same agent, same 16 tasks, 4 runs
 
-| | Run 1 | Run 2 | Run 3 | **pass@3** | **pass^3** |
-|---|---|---|---|---|---|
-| Accuracy | 100% | 93.8% | 93.8% | **100%** | **93.8%** |
+| | Run 1 | Run 2 | Run 3 | Run 4 | **pass@4** | **pass^4** |
+|---|---|---|---|---|---|---|
+| Accuracy | 100% | 93.8% | 93.8% | 93.8% | **100%** | **93.8%** |
 
-15 of 16 tasks were solved on every run. The only flaky one was reading a chess diagram (1 of 3). pass^k (all k runs correct) is the number that matters if someone depends on the agent.
+Run 4 is the ablation's baseline: the same configuration, run again. 15 of 16 tasks were solved on every run. The only flaky one was reading a chess diagram (1 of 4). pass^k (all k runs correct) is the number that matters if someone depends on the agent.
 
 ### Ablations: what each piece is worth
 
