@@ -1,156 +1,124 @@
-# gaia-agent
+# GAIA Agent
 
-An agent for the final assignment of the Hugging Face Agents Course, Unit 4: 20 GAIA Level-1
-validation questions, scored by exact match. The pass mark for the certificate is 30% (6 of 20).
+**A research agent, with the tracing, evals and reliability work it takes to trust one.** Built for the final assignment (Unit 4) of the [Hugging Face Agents Course](https://huggingface.co/learn/agents-course): 20 Level-1 questions from the [GAIA benchmark](https://huggingface.co/papers/2311.12983), graded by exact match. It runs entirely on **free models**.
 
-It is a single [smolagents](https://github.com/huggingface/smolagents) 1.26.0 `CodeAgent`. The
-model writes Python, calls tools from that Python, and hands back a short final answer, which is
-then normalized for exact-match scoring. Every model it uses is free: a free API tier or a local
-model.
+<!-- RESULTS:START -->
+| | |
+|---|---|
+| **Official score** (course API, 20 GAIA L1 questions) | _run in progress_ |
+| **Practice set** (16 original tasks, 3 repeats) | _run in progress_ |
+| **Model cost** | **$0**: free OpenRouter models only, enforced in code |
+<!-- RESULTS:END -->
 
-**Score:** TBD (no full run yet).
+**Results site:** step-by-step replays of every practice task, tool usage, latency, failure tags and ablations: **[bakulbadwal.github.io/gaia-agent](https://bakulbadwal.github.io/gaia-agent/)**
 
-> Draft README, 2026-10-10. The base agent is integrated and tested offline. No real model call
-> has been made yet, so answer quality is still unmeasured.
+---
+
+## Why this one is different
+
+Most Unit 4 submissions are one agent, one run and one score. This project treats the agent as something that will be deployed, so it measures it the way a production team would.
+
+| | What it does | Why it matters |
+|---|---|---|
+| **Observability** | Every run writes a full trace: each step's reasoning, the Python it wrote, every tool call and its result, tokens and timing. Sub-agent calls are captured too, which smolagents doesn't keep on its own (it resets a managed agent's memory on every call). | You can't fix what you can't see. Each failure below was diagnosed from a trace, not guessed. |
+| **Its own eval suite** | A 16-task practice set I wrote, with verifiable gold answers and input files built from scratch (spreadsheets, CSV, JSON, PDF, audio, a chess diagram, Python files, multi-hop Wikipedia). It is scored with a line-for-line port of GAIA's official quasi-exact scorer. | The course API returns one number and never says which answers were right. A local set with known answers is the only way to improve without overfitting the benchmark. |
+| **Reliability, not just accuracy** | Every task is run 3 times, and the report shows **pass@k** (solved at least once) and **pass^k** (solved every time). | A demo needs one lucky run. A deployment needs pass^k. The gap between the two numbers is where the flakiness hides. |
+| **Ablations** | The same set is re-run with web tools removed, media tools removed, a manager + specialists architecture, and a format-verifier pass. | It shows what each piece is actually worth, instead of asserting it. |
+| **Running on free models** | A token-bucket rate limiter and a daily request budget. Backoff that respects `Retry-After`. Fallback chains when a model returns an empty reply or a 429. A per-call usage log. A **`:free`-only guard** that refuses any billable model id before a request is sent. | Free tiers are flaky. This is the plumbing that turns flaky into finishes. |
+| **Contamination policy** | A guard in the agent's web tools blocks GAIA answer pages, and nothing is hard-coded. The public repo and site never publish the GAIA questions or the agent's answers to them, because the dataset asks that its items not be reshared in crawlable form. | A score is only worth something if it wasn't looked up. |
 
 ## How it works
 
+```mermaid
+flowchart LR
+    Q[Question + attached file] --> A
+    subgraph A[smolagents CodeAgent]
+      direction TB
+      T[Think] --> C[Write Python that calls tools]
+      C --> O[Observe tool output]
+      O --> T
+    end
+    A -->|web| W[web_search · visit_webpage<br/>wikipedia page / tables / revisions]
+    A -->|media| M[read_file · run_python_file<br/>transcribe_audio · image_question<br/>youtube transcript / audio / frames]
+    A --> F[final_answer] --> V{format check<br/>+ optional verifier} --> N[normalize] --> S[(answers + trace)]
+    P[providers.py<br/>rate limit · budget · fallback · :free guard] -.-> A
 ```
-question (+ attached file) ──► CodeAgent (max 12 steps, temperature 0)
-                                  │  writes Python that calls tools
-                                  ├─ web:   web_search, visit_webpage, wikipedia_*
-                                  ├─ media: read_file, run_python_file, transcribe_audio,
-                                  │         image_question, youtube_*
-                                  └─ final_answer ─► shape check ─► normalize_answer ─► runs/answers.jsonl
-```
 
-- **The system prompt** is GAIA's format rules: numbers with no units or thousands separators,
-  minimal strings, comma-separated lists, and the question's own formatting instructions
-  followed exactly. It also includes working habits: open the attached file first, prefer the
-  Wikipedia tools for encyclopedic facts, count by printing the items, do arithmetic in Python.
-- **The answer check** (`final_answer_checks`) refuses an empty answer or an essay-length one, so
-  the agent has to retry.
-- **`normalize_answer`** strips "FINAL ANSWER:", wrapping quotes or bold, a trailing period
-  (abbreviations keep theirs) and thousands separators, and tidies comma lists.
+- **The agent** is a smolagents 1.26 `CodeAgent`. It acts by writing Python, so it can loop, filter a DataFrame and call three tools in one step, instead of one JSON tool call per round trip. The system prompt carries GAIA's answer rules: numbers without units or separators, minimal strings, comma lists, and the question's own format instructions.
+- **Multi-agent mode** (`GAIA_ARCH=multi`) uses a manager that delegates to a `web_researcher` and a `media_analyst`, each with only its own tools.
+- **Verifier mode** (`GAIA_VERIFY=1`) adds one extra call that may only *reformat* the answer, never re-research it. Its output is accepted only if it passes a pure-reformat check.
+- **Models:** NVIDIA Nemotron 3 Ultra (free) for reasoning; Nemotron Nano Omni or dots-3 (free) for images and video frames. Each falls back to the next free model in its chain.
 
-## Tools
+### Tools (13)
 
-| Tool | What it does |
+| Web | Media and files |
 |---|---|
-| `web_search(query, max_results=8)` | Searches DuckDuckGo through `ddgs`, falling back to other engines. Results that hit the leak guard are removed. |
-| `visit_webpage(url, start=0, max_chars=15000)` | Converts HTML to markdown with real tables, and reads PDFs page by page. Wikipedia URLs go through the MediaWiki API. Long pages are paged. |
-| `wikipedia_search(query)` | Searches titles through the MediaWiki API. |
-| `wikipedia_page(title, section="", ...)` | Renders a page or one section as markdown with expanded tables; also lists the sections. |
-| `wikipedia_revision(title, as_of, ...)` | Gets the latest revision on or before a date, for questions that ask "as of <date>". |
-| `wikipedia_page_info(title)` | Gets the creation date and creator, the latest revision, the talk page, Featured or Good article status, and article-history templates. |
-| `read_file(path)` | Reads xlsx, xls or csv (as tables, with sums, category values and cell fill colours), py, txt or json, pdf, docx, pptx, and zip. |
-| `run_python_file(path, timeout_s=30)` | Runs an attached `.py` in a subprocess and returns its exit code, stdout and stderr. |
-| `transcribe_audio(path, timestamps=False)` | Transcribes with local faster-whisper (`small` model, CPU, cached). |
-| `image_question(path, question)` | Asks the vision model about a local image. |
-| `youtube_transcript(url)` | Fetches YouTube captions through yt-dlp, manual before automatic, de-duplicated and timestamped. |
-| `youtube_audio_transcript(url)` | Downloads only the audio and transcribes it with Whisper, for videos without captions. |
-| `youtube_frames_question(url, question, num_frames=16)` | Samples frames with ffmpeg and sends them to the vision model in batches of 8. |
+| `web_search`: DuckDuckGo, with GAIA results filtered out | `read_file`: xlsx, csv, json, pdf, txt, py (every sheet as a markdown table, with dtypes) |
+| `visit_webpage`: HTML or PDF to markdown, paged | `run_python_file`: runs an attached script in a subprocess |
+| `wikipedia_search` | `transcribe_audio`: local Whisper (faster-whisper), cached |
+| `wikipedia_page`: rendered page **with tables**, by section | `image_question`: the vision model, with chess-specific prompting |
+| `wikipedia_revision`: the page as it stood on a past date | `youtube_transcript`: captions, with rolling-caption dedupe |
+| `wikipedia_page_info`: talk page, quality status, creation date | `youtube_audio_transcript` · `youtube_frames_question` (frames to the vision model) |
 
-Every tool returns a string and never raises. A failure comes back as `ERROR: ...`, so the
-agent can read it and choose another tool.
+## Results
 
-## Setup
+<!-- DETAIL:START -->
+_Filled in after the runs finish: the official score, practice accuracy, pass@3 and pass^3, the ablation table and the failure breakdown._
+<!-- DETAIL:END -->
+
+## Run it
 
 ```bash
-uv venv --python 3.12 .venv
-uv pip install --python .venv/bin/python -r requirements.txt
-brew install ffmpeg            # Whisper decoding and video frames; the Space uses packages.txt
+uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python -r requirements.txt
+echo "OPENROUTER_API_KEY=sk-or-..." >> ~/.claude/.env   # or export it; any free OpenRouter key works
+
+python run.py                                   # answer the 20 Unit 4 questions (resumable, traced)
+python submit.py                                # dry run: shows the payload
+python submit.py --yes                          # submit to the course API
+python evals/run_practice.py --repeat 3         # practice set, scored, pass^k
+python evals/ablate.py                          # ablation table
+python report/build_report.py                   # rebuild the results site (public redaction is on by default)
+python -m pytest -q -m "not network"            # 396 offline tests
 ```
 
-Keys are read from the environment, and from `KEY=VALUE` lines in `~/.claude/.env` if that file
-exists. Key values are never printed.
+| Setting | Effect |
+|---|---|
+| `GAIA_PROVIDER` | `openrouter` (default when its key is set) · `gemini` · `groq` · `lmstudio` (local) |
+| `GAIA_ARCH` | `single` (default) · `multi` (manager + specialists) |
+| `GAIA_VERIFY=1` | format-verifier pass |
+| `GAIA_DISABLE_TOOLS` | comma list of tools to remove (ablations) |
+| `GAIA_MODEL_ID` / `GAIA_VISION_MODEL_ID` | override the model chains |
+| `GAIA_ALLOW_PAID` | off by default: non-`:free` model ids are refused |
 
-### Model presets (`GAIA_PROVIDER`)
-
-| Preset | Endpoint | Key env | Default model |
-|---|---|---|---|
-| `gemini` (default) | Google AI Studio, OpenAI-compatible | `GEMINI_API_KEY` | `gemini-2.5-flash` |
-| `groq` | Groq | `GROQ_API_KEY` | `openai/gpt-oss-120b` for text, `meta-llama/llama-4-scout-17b-16e-instruct` for vision |
-| `lmstudio` | `http://localhost:1234/v1` | none | the first model the server lists |
-
-Other environment variables:
-- `GAIA_MODEL_ID` and `GAIA_VISION_MODEL_ID` override the models.
-- `GAIA_BASE_URL` overrides the endpoint.
-- `GAIA_RPM` caps requests per minute on the client side. The defaults are 8 for gemini and 25 for groq.
-- `GAIA_TEMPERATURE` sets the temperature (default 0).
-- `GAIA_WHISPER_MODEL` picks the Whisper model (default `small`).
-
-To check which model ids a provider actually serves, run
-`python -c 'from gaia_agent.config import list_models; print(list_models())'`. It is a free
-metadata call.
-
-An OpenRouter free-tier layer is written in `gaia_agent/providers.py`: rate limiting, a daily
-budget guard, fallback chains and usage logging. It is **not wired in yet**.
-
-## Running
-
-```bash
-python run.py                       # every question without a clean cached answer
-python run.py --only 8e86 a1e9      # task_id prefixes, space- or comma-separated
-python run.py --redo --limit 3      # re-run, at most 3 questions
-python run.py --timeout 600         # per-question wall clock in seconds (default 420)
-```
-
-`run.py` caches the questions in `data/questions.json` and appends one JSON line per attempt to
-`runs/answers.jsonl`, with the answer, raw output, steps, error, seconds and provider info. It also
-writes each trace to `runs/traces/`. On a rerun it skips any task whose latest record has a clean
-answer.
-
-```bash
-python submit.py                    # DRY RUN: prints the payload, sends nothing
-python submit.py --yes              # POSTs to the scoring API
-```
-
-`submit.py` sends the latest non-empty answer for each task, in question order, as user `bacool`.
-The `agent_code` is the Space's `/tree/main` URL. `app.py` is the course's Gradio template wired
-to the same code. Its second button submits cached answers without re-running the agent.
-
-```bash
-.venv/bin/python -m pytest -q tests                 # all tests, network included
-.venv/bin/python -m pytest -q tests -m "not network"
-```
-
-## Honesty rules
-
-1. **The agent solves every question itself.** No answers are hard-coded anywhere: not in code,
-   not in prompts, not in fixtures. Prompts are not tuned toward any known answer, and fixes after
-   a run must be general (tools, format rules), never tied to one question.
-2. **No answer lookups.** An answer-leak guard refuses any URL, search query or search result
-   that mentions "gaia", every Hugging Face dataset or Space URL (`huggingface.co/datasets/`,
-   `/spaces/`, `hf.co/...`, `*.hf.space`), and anything containing `agents-course`. The guard
-   covers the web tools, and it also covers URLs opened from the agent's own Python:
-   `pandas.read_*` and `numpy.genfromtxt` go through a guarded `urllib.request.urlopen` and
-   `fsspec.open`, which also refuse every `hf://` path. `requests` and `urllib` cannot be imported
-   in the agent's sandbox.
-3. **No paid API calls.** Only free tiers and local models are used.
-4. **Submissions go only through the course API, and only by hand**, with `python submit.py --yes`.
-
-## Known limitations
-
-- **The course API's `GET /files/{task_id}` returns 404 for all five questions with an
-  attachment** (png, two mp3s, py, xlsx; checked 2026-10-10). The agent is told the file could
-  not be downloaded. Until the API serves those files, the realistic ceiling is 15 of 20.
-- The leak guard blocks by keyword. A copied answer list on a page that never says "gaia" and
-  isn't on a Hugging Face URL would get through.
-- `transcribe_audio` uses Whisper `small` on CPU. Use `GAIA_WHISPER_MODEL=medium` if a transcript
-  looks wrong.
-
-## Layout
+## Repository layout
 
 ```
-gaia_agent/
-  config.py       provider presets, get_model(), vision_complete(), load_env()
-  files.py        task attachment download + cache
-  agent.py        build_agent(), solve(), normalize_answer(), the code-level leak guard
-  tools_web.py    TOOLS_WEB
-  tools_media.py  TOOLS_MEDIA
-  run.py submit.py
-  providers.py trace.py   v2 (reliability + observability), being wired in
-app.py            HF Space (Gradio + OAuth)
-tests/            pytest; `network` marker for live tests
+gaia_agent/   agent, tools_web, tools_media, providers (+ presets), trace, files, run, submit
+evals/        scorer (GAIA port), practice set + generator, run_practice, passk, ablate, configs
+analysis/     error_analysis: automatic failure tags per trace
+report/       static results-site generator  →  docs/ (GitHub Pages)
+tests/        396 offline + 18 network tests
+app.py        Hugging Face Space (the course template, wired to this agent)
 ```
+
+## Design decisions
+
+| Decision | Why | Trade-off |
+|---|---|---|
+| **CodeAgent over JSON tool calls** | Code can filter, loop and combine tools in one step, so there are fewer round trips on a rate-limited free tier ([Wang et al., 2024](https://huggingface.co/papers/2402.01030)). | Running model-written code needs a sandbox: smolagents' restricted executor, a code-level network guard, and timeouts. |
+| **Free models only** | Shows the agent design carrying the result, not a frontier model. | Free endpoints return empty replies and 429s, so the fallback chains do real work, and the score has a lower ceiling. |
+| **Local Whisper for audio** | Free, private, and cached. | CPU transcription is slower than an API. |
+| **Fix timeouts once, generally** | The live test found that smolagents' 30 s code-step timeout was silently throwing away slow-but-successful tool calls. The fix raised the limit for every step (300 s; 1,200 s for a manager waiting on a specialist), bounded by a per-question watchdog. | A truly stuck step takes longer to cut off. |
+| **Redacted public results** | GAIA asks that its items not be reshared, so they aren't. | The public GAIA trajectories show only each step's skeleton. Full replays are shown for the practice set instead. |
+
+## Limitations
+
+- The course's file endpoint (`GET /files/{task_id}`) returned **404 for all 5 attachment questions** on 2026-10-10, so those 5 can't be answered from the course API. The agent supports fetching just those attachments from the gated GAIA dataset (`GAIA_ATTACHMENTS_FROM_HUB=1`) once access is granted, and never reads the dataset's answer metadata.
+- The practice set is 16 tasks: a regression suite, not a benchmark. Its numbers aren't comparable to GAIA's.
+- Free-model outputs change over time, so a re-run won't reproduce these exact numbers. The traces record what happened on each run.
+
+## Credits
+
+The [Hugging Face Agents Course](https://github.com/huggingface/agents-course) (Unit 4 and its Space template) · [smolagents](https://github.com/huggingface/smolagents) · [GAIA](https://huggingface.co/papers/2311.12983) (Mialon et al., 2023) and its leaderboard scorer · free models served by [OpenRouter](https://openrouter.ai) (NVIDIA Nemotron, dots, Gemma).
+
+Built by [Bakul Badwal](https://github.com/bakulbadwal) (UVA Darden MBA '27) with Claude Code. MIT License.

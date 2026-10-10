@@ -365,7 +365,9 @@ def analyze_trace(
         tag("vision_used", v)
 
     ran_code = [s for s in top_actions if (s.get("code") or "").strip()]
-    if ran_code and not any_tool:  # parse failures that never ran code are not "answered without tools"
+    # Reading an attachment directly in code (pandas, open()) is real work, not "answered from memory".
+    read_direct = any(re.search(r"\b(read_csv|read_excel|read_json|open\()", s.get("code") or "") for s in ran_code)
+    if ran_code and not any_tool and not read_direct:  # parse failures that never ran code are not "answered without tools"
         tag("no_tool_used", f"{len(ran_code)} code step(s), no tool calls")
 
     if max_steps is not None and len(top_actions) >= max_steps and "hit_max_steps" not in details:

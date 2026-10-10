@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -130,6 +131,16 @@ def main(argv: list[str] | None = None) -> dict | None:
     print(f"\nPOST {API_URL}/submit ...")
     result = post_payload(payload)
     print(json.dumps(result, indent=2))
+    run_ids = sorted({r.get("run_id") for r in latest_answers(Path(args.path)).values() if r.get("run_id")})
+    record = {
+        "submitted_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "run_id": run_ids[-1] if len(run_ids) == 1 else ",".join(run_ids),
+        "agent_code": payload["agent_code"],
+        "response": {k: result.get(k) for k in ("score", "correct_count", "total_attempted", "message") if k in result},
+    }
+    RUNS_DIR.mkdir(parents=True, exist_ok=True)
+    with open(RUNS_DIR / "submissions.jsonl", "a", encoding="utf-8") as fh:
+        fh.write(json.dumps(record) + "\n")
     return result
 
 
