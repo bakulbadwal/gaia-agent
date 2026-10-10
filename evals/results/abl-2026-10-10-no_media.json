@@ -1,0 +1,614 @@
+{
+  "run_id": "abl-2026-10-10-no_media",
+  "config": {
+    "provider": "openrouter",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "vision_model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "arch": "single",
+    "disabled_tools": [
+      "image_question",
+      "transcribe_audio",
+      "youtube_audio_transcript",
+      "youtube_frames_question",
+      "youtube_transcript"
+    ],
+    "verify": false
+  },
+  "set": "practice",
+  "started_at": "2026-10-10T19:01:25+00:00",
+  "finished_at": "2026-10-10T19:45:26+00:00",
+  "budget": {
+    "max_requests": 115,
+    "max_steps": 12,
+    "stopped": null,
+    "calls_this_invocation": 97
+  },
+  "items": [
+    {
+      "id": "p01-xlsx-late-loans",
+      "gold": "8",
+      "format": "number",
+      "skills": [
+        "file:xlsx",
+        "filter",
+        "date-arithmetic",
+        "count",
+        "strict-bound"
+      ],
+      "answer": "8",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 59.3,
+      "steps": 3,
+      "input_tokens": 16666,
+      "output_tokens": 1859,
+      "model_calls": 3,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p01-xlsx-late-loans.json"
+    },
+    {
+      "id": "p02-xlsx-multisheet-sku",
+      "gold": "KX-2210",
+      "format": "string",
+      "skills": [
+        "file:xlsx",
+        "multi-sheet",
+        "group-by",
+        "argmax"
+      ],
+      "answer": "KX-2210",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 49.8,
+      "steps": 3,
+      "input_tokens": 14439,
+      "output_tokens": 901,
+      "model_calls": 3,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p02-xlsx-multisheet-sku.json"
+    },
+    {
+      "id": "p03-csv-evening-trips",
+      "gold": "4",
+      "format": "number",
+      "skills": [
+        "file:csv",
+        "datetime",
+        "filter",
+        "count",
+        "strict-bound"
+      ],
+      "answer": "4",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 19.1,
+      "steps": 3,
+      "input_tokens": 14231,
+      "output_tokens": 1022,
+      "model_calls": 3,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p03-csv-evening-trips.json"
+    },
+    {
+      "id": "p04-csv-pm25-ranking",
+      "gold": "Harbour Road, Station Square, Kingsway",
+      "format": "ordered_list",
+      "skills": [
+        "file:csv",
+        "missing-values",
+        "group-by",
+        "ranking",
+        "ordered-list"
+      ],
+      "answer": "Harbour Road, Station Square, Kingsway",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 11.7,
+      "steps": 3,
+      "input_tokens": 14620,
+      "output_tokens": 784,
+      "model_calls": 3,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p04-csv-pm25-ranking.json"
+    },
+    {
+      "id": "p05-py-queue-sim",
+      "gold": "4",
+      "format": "number",
+      "skills": [
+        "file:py",
+        "code-execution",
+        "modify-parameters"
+      ],
+      "answer": "4",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 39.7,
+      "steps": 4,
+      "input_tokens": 18951,
+      "output_tokens": 1195,
+      "model_calls": 4,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p05-py-queue-sim.json"
+    },
+    {
+      "id": "p06-py-invert-cipher",
+      "gold": "lantern",
+      "format": "string",
+      "skills": [
+        "file:py",
+        "code-reasoning",
+        "inversion"
+      ],
+      "answer": "",
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 1359.5,
+      "steps": 1,
+      "input_tokens": 4076,
+      "output_tokens": 65536,
+      "model_calls": 1,
+      "error": "AgentError: Agent interrupted.",
+      "timed_out": true,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p06-py-invert-cipher.json"
+    },
+    {
+      "id": "p07-audio-platform",
+      "gold": "11",
+      "format": "number",
+      "skills": [
+        "file:audio",
+        "transcription",
+        "distractors"
+      ],
+      "answer": "<code> result = write_file(path=\"/tmp/transcribe.py\", content=\"import whisper\\nmodel = whisper.load_model('base')\\nresult = model.transcribe('/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/practice_files/p07-audio-platform/station_announcement.mp3')\\nprint(result['text'])\") print(result) </code> Calling tools: [{'id': 'call_13', 'type': 'function', 'function': {'name': 'python_interpreter', 'arguments': 'result = write_file(path=\"/tmp/transcribe.py\", content=\"import whisper\\nmodel = whisper.load_model(\\'base\\')\\nresult = model.transcribe(\\'/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/practice_files/p07-audio-platform/station_announcement.mp3\\')\\nprint(result[\\'text\\'])\")\\nprint(result)'}}]",
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 214.7,
+      "steps": 13,
+      "input_tokens": 73481,
+      "output_tokens": 7958,
+      "model_calls": 13,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p07-audio-platform.json"
+    },
+    {
+      "id": "p08-audio-mean-reading",
+      "gold": "20.6",
+      "format": "number",
+      "skills": [
+        "file:audio",
+        "transcription",
+        "arithmetic",
+        "rounding"
+      ],
+      "answer": "<code> result = web_search(query=\"temperature readings mean calculation technician audio file\") print(result) </code> Calling tools: [{'id': 'call_13', 'type': 'function', 'function': {'name': 'python_interpreter', 'arguments': 'result = web_search(query=\"temperature readings mean calculation technician audio file\")\\nprint(result)'}}]",
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 193.0,
+      "steps": 13,
+      "input_tokens": 80728,
+      "output_tokens": 6425,
+      "model_calls": 13,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p08-audio-mean-reading.json"
+    },
+    {
+      "id": "p09-image-chess-mate",
+      "gold": "Qe8#",
+      "format": "string",
+      "skills": [
+        "file:image",
+        "vision",
+        "chess",
+        "verification"
+      ],
+      "answer": "<code> result = image_question(path=\"/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/practice_files/p09-image-chess-mate/chess_diagram.png\", question=\"What is the chess position shown in this diagram? Please describe the position of all pieces on the board, whose turn it is, and what the checkmate in one move for White is in standard algebraic notation (SAN) with the mate symbol.\") print(result) </code> Calling tools: [{'id': 'call_13', 'type': 'function', 'function': {'name': 'python_interpreter', 'arguments': 'result = image_question(path=\"/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/practice_files/p09-image-chess-mate/chess_diagram.png\", question=\"What is the chess position shown in this diagram? Please describe the position of all pieces on the board, whose turn it is, and what the checkmate in one move for White is in standard algebraic notation (SAN) with the mate symbol.\")\\nprint(result)'}}]",
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 188.8,
+      "steps": 13,
+      "input_tokens": 96224,
+      "output_tokens": 2871,
+      "model_calls": 13,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p09-image-chess-mate.json"
+    },
+    {
+      "id": "p10-image-chart-mean",
+      "gold": "September",
+      "format": "string",
+      "skills": [
+        "file:image",
+        "vision",
+        "chart-reading",
+        "arithmetic"
+      ],
+      "answer": "<code> result = web_search(query=\"p10-image-chart-mean rainfall chart monthly average\", max_results=10) print(result) </code> Calling tools: [{'id': 'call_13', 'type': 'function', 'function': {'name': 'python_interpreter', 'arguments': 'result = web_search(query=\"p10-image-chart-mean rainfall chart monthly average\", max_results=10)\\nprint(result)'}}]",
+      "correct": false,
+      "correct_strict": false,
+      "seconds": 237.7,
+      "steps": 13,
+      "input_tokens": 86108,
+      "output_tokens": 3935,
+      "model_calls": 13,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p10-image-chart-mean.json"
+    },
+    {
+      "id": "p11-pdf-action-items",
+      "gold": "3",
+      "format": "number",
+      "skills": [
+        "file:pdf",
+        "filter",
+        "date-comparison",
+        "near-miss-names",
+        "count"
+      ],
+      "answer": "3",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 30.3,
+      "steps": 3,
+      "input_tokens": 14629,
+      "output_tokens": 1741,
+      "model_calls": 3,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p11-pdf-action-items.json"
+    },
+    {
+      "id": "p12-json-top-customer",
+      "gold": "Theo Nakamura",
+      "format": "string",
+      "skills": [
+        "file:json",
+        "nested-data",
+        "filter",
+        "group-by",
+        "argmax"
+      ],
+      "answer": "Theo Nakamura",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 58.2,
+      "steps": 8,
+      "input_tokens": 47618,
+      "output_tokens": 2117,
+      "model_calls": 8,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/p12-json-top-customer.json"
+    },
+    {
+      "id": "w01-wiki-element-city",
+      "gold": "67",
+      "format": "number",
+      "skills": [
+        "web",
+        "wikipedia",
+        "multi-hop",
+        "number"
+      ],
+      "answer": "67",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 11.4,
+      "steps": 3,
+      "input_tokens": 15231,
+      "output_tokens": 393,
+      "model_calls": 3,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/w01-wiki-element-city.json"
+    },
+    {
+      "id": "w02-wiki-architect-prize",
+      "gold": "2003",
+      "format": "number",
+      "skills": [
+        "web",
+        "wikipedia",
+        "multi-hop",
+        "year"
+      ],
+      "answer": "2003",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 44.1,
+      "steps": 4,
+      "input_tokens": 22851,
+      "output_tokens": 574,
+      "model_calls": 4,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/w02-wiki-architect-prize.json"
+    },
+    {
+      "id": "w03-wiki-bolivia-borders",
+      "gold": "Argentina, Brazil, Chile, Paraguay, Peru",
+      "format": "ordered_list",
+      "skills": [
+        "web",
+        "wikipedia",
+        "list",
+        "ordered-list",
+        "alphabetical"
+      ],
+      "answer": "Argentina, Brazil, Chile, Paraguay, Peru",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 91.6,
+      "steps": 6,
+      "input_tokens": 34604,
+      "output_tokens": 1157,
+      "model_calls": 6,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/w03-wiki-bolivia-borders.json"
+    },
+    {
+      "id": "w04-wiki-mozart-river",
+      "gold": "Salzach",
+      "format": "string",
+      "skills": [
+        "web",
+        "wikipedia",
+        "multi-hop",
+        "entity"
+      ],
+      "answer": "Salzach",
+      "correct": true,
+      "correct_strict": true,
+      "seconds": 31.7,
+      "steps": 4,
+      "input_tokens": 22143,
+      "output_tokens": 521,
+      "model_calls": 4,
+      "error": null,
+      "timed_out": false,
+      "arch": "single",
+      "verifier": null,
+      "trace_path": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/traces/abl-2026-10-10-no_media/w04-wiki-mozart-river.json"
+    }
+  ],
+  "summary": {
+    "n": 16,
+    "correct": 11,
+    "accuracy": 0.6875,
+    "accuracy_ci95": [
+      0.444,
+      0.8584
+    ],
+    "correct_strict": 11,
+    "accuracy_strict": 0.6875,
+    "format_gap": 0,
+    "errors": 1,
+    "skipped": 0,
+    "mean_seconds": 165.037,
+    "mean_steps": 6.062,
+    "total_tokens": 675589,
+    "model_calls": 97,
+    "by_skill": {
+      "file:xlsx": {
+        "n": 2,
+        "correct": 2
+      },
+      "filter": {
+        "n": 4,
+        "correct": 4
+      },
+      "date-arithmetic": {
+        "n": 1,
+        "correct": 1
+      },
+      "count": {
+        "n": 3,
+        "correct": 3
+      },
+      "strict-bound": {
+        "n": 2,
+        "correct": 2
+      },
+      "multi-sheet": {
+        "n": 1,
+        "correct": 1
+      },
+      "group-by": {
+        "n": 3,
+        "correct": 3
+      },
+      "argmax": {
+        "n": 2,
+        "correct": 2
+      },
+      "file:csv": {
+        "n": 2,
+        "correct": 2
+      },
+      "datetime": {
+        "n": 1,
+        "correct": 1
+      },
+      "missing-values": {
+        "n": 1,
+        "correct": 1
+      },
+      "ranking": {
+        "n": 1,
+        "correct": 1
+      },
+      "ordered-list": {
+        "n": 2,
+        "correct": 2
+      },
+      "file:py": {
+        "n": 2,
+        "correct": 1
+      },
+      "code-execution": {
+        "n": 1,
+        "correct": 1
+      },
+      "modify-parameters": {
+        "n": 1,
+        "correct": 1
+      },
+      "code-reasoning": {
+        "n": 1,
+        "correct": 0
+      },
+      "inversion": {
+        "n": 1,
+        "correct": 0
+      },
+      "file:audio": {
+        "n": 2,
+        "correct": 0
+      },
+      "transcription": {
+        "n": 2,
+        "correct": 0
+      },
+      "distractors": {
+        "n": 1,
+        "correct": 0
+      },
+      "arithmetic": {
+        "n": 2,
+        "correct": 0
+      },
+      "rounding": {
+        "n": 1,
+        "correct": 0
+      },
+      "file:image": {
+        "n": 2,
+        "correct": 0
+      },
+      "vision": {
+        "n": 2,
+        "correct": 0
+      },
+      "chess": {
+        "n": 1,
+        "correct": 0
+      },
+      "verification": {
+        "n": 1,
+        "correct": 0
+      },
+      "chart-reading": {
+        "n": 1,
+        "correct": 0
+      },
+      "file:pdf": {
+        "n": 1,
+        "correct": 1
+      },
+      "date-comparison": {
+        "n": 1,
+        "correct": 1
+      },
+      "near-miss-names": {
+        "n": 1,
+        "correct": 1
+      },
+      "file:json": {
+        "n": 1,
+        "correct": 1
+      },
+      "nested-data": {
+        "n": 1,
+        "correct": 1
+      },
+      "web": {
+        "n": 4,
+        "correct": 4
+      },
+      "wikipedia": {
+        "n": 4,
+        "correct": 4
+      },
+      "multi-hop": {
+        "n": 3,
+        "correct": 3
+      },
+      "number": {
+        "n": 1,
+        "correct": 1
+      },
+      "year": {
+        "n": 1,
+        "correct": 1
+      },
+      "list": {
+        "n": 1,
+        "correct": 1
+      },
+      "alphabetical": {
+        "n": 1,
+        "correct": 1
+      },
+      "entity": {
+        "n": 1,
+        "correct": 1
+      }
+    },
+    "by_format": {
+      "number": {
+        "n": 8,
+        "correct": 6
+      },
+      "string": {
+        "n": 6,
+        "correct": 3
+      },
+      "ordered_list": {
+        "n": 2,
+        "correct": 2
+      }
+    }
+  },
+  "error_analysis": "/Users/bakulbadwal/Documents/GitHub/gaia-agent/runs/error_analysis/abl-2026-10-10-no_media.json"
+}

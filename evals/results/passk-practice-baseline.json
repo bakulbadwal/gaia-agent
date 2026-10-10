@@ -1,0 +1,134 @@
+{
+  "metric": "gaia",
+  "runs": [
+    "practice-baseline-r1",
+    "practice-baseline-r2",
+    "practice-baseline-r3"
+  ],
+  "same_config": true,
+  "config": {
+    "arch": "single",
+    "disabled_tools": [],
+    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "provider": "openrouter",
+    "verify": false
+  },
+  "n_runs": 3,
+  "run_accuracy": {
+    "mean": 0.9583,
+    "stdev": 0.0361,
+    "min": 0.9375,
+    "max": 1.0
+  },
+  "table": [
+    {
+      "k": 3,
+      "tasks": 16,
+      "pass@k": 1.0,
+      "pass^k": 0.9375
+    }
+  ],
+  "per_task": {
+    "p01-xlsx-late-loans": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p02-xlsx-multisheet-sku": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p03-csv-evening-trips": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p04-csv-pm25-ranking": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p05-py-queue-sim": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p06-py-invert-cipher": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p07-audio-platform": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p08-audio-mean-reading": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p09-image-chess-mate": {
+      "n": 3,
+      "c": 1,
+      "p": 0.3333
+    },
+    "p10-image-chart-mean": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p11-pdf-action-items": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "p12-json-top-customer": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "w01-wiki-element-city": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "w02-wiki-architect-prize": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "w03-wiki-bolivia-borders": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    },
+    "w04-wiki-mozart-river": {
+      "n": 3,
+      "c": 3,
+      "p": 1.0
+    }
+  },
+  "always_solved": [
+    "p01-xlsx-late-loans",
+    "p02-xlsx-multisheet-sku",
+    "p03-csv-evening-trips",
+    "p04-csv-pm25-ranking",
+    "p05-py-queue-sim",
+    "p06-py-invert-cipher",
+    "p07-audio-platform",
+    "p08-audio-mean-reading",
+    "p10-image-chart-mean",
+    "p11-pdf-action-items",
+    "p12-json-top-customer",
+    "w01-wiki-element-city",
+    "w02-wiki-architect-prize",
+    "w03-wiki-bolivia-borders",
+    "w04-wiki-mozart-river"
+  ],
+  "never_solved": [],
+  "flaky": [
+    "p09-image-chess-mate"
+  ]
+}

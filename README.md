@@ -6,7 +6,7 @@
 | | |
 |---|---|
 | **Official score** (course API, 20 GAIA L1 questions) | **85% (17 / 20)**: the certificate bar is 30% |
-| **Practice set** (16 original tasks, 3 repeats) | _run in progress_ |
+| **Practice set** (16 original tasks, 3 repeats) | **95.8% mean accuracy · pass@3 100% · pass^3 93.8%** |
 | **Model cost** | **$0**: free OpenRouter models only, enforced in code |
 <!-- RESULTS:END -->
 
@@ -63,7 +63,43 @@ flowchart LR
 ## Results
 
 <!-- DETAIL:START -->
-_Filled in after the runs finish: the official score, practice accuracy, pass@3 and pass^3, the ablation table and the failure breakdown._
+All runs are from 2026-10-10 and used free OpenRouter models only. Total model spend: **$0.00**.
+
+### Official GAIA score: 85% (17 / 20)
+
+| | |
+|---|---|
+| Questions | 20 GAIA Level-1 validation questions, from the course API |
+| Correct | **17** (the certificate needs 6) |
+| Steps per question | mean 4.35 · median time 47 s · p90 91 s |
+| Model calls | 148 for the whole run, including vision calls and the 5 attachment re-runs; 4 retries |
+| Most-used tools | `visit_webpage` 24 · `web_search` 17 · `image_question` 6 · `read_file` 4 |
+
+The course API returns only an aggregate score, so it doesn't reveal which three answers were wrong. One is known: the **chess-diagram question** timed out after free vision models took up to 6 minutes per image. The practice set's chess task (below) is the same weakness: it's the only task that failed across repeats.
+
+**Found in the traces, then fixed:** in the first pass, all 5 attachment questions failed because the course's file endpoint returns 404. Each of them burned all 12 steps hunting for a file that wasn't there. The fix was general: a missing input now tells the agent to stop and answer `unknown` (a regression test covers it). The attachments were then fetched from the GAIA dataset by exact file name, never touching its answer metadata.
+
+### Reliability: same agent, same 16 tasks, 3 runs
+
+| | Run 1 | Run 2 | Run 3 | **pass@3** | **pass^3** |
+|---|---|---|---|---|---|
+| Accuracy | 100% | 93.8% | 93.8% | **100%** | **93.8%** |
+
+15 of 16 tasks were solved on every run. The only flaky one was reading a chess diagram (1 of 3). pass^k (all k runs correct) is the number that matters if someone depends on the agent.
+
+### Ablations: what each piece is worth
+
+| Config | Accuracy | Tokens / task | Time / task | Takeaway |
+|---|---|---|---|---|
+| **Baseline** (single CodeAgent) | 93.8% | 20.5k | 54 s | |
+| No media tools | **68.8%** (−25 pts) | 42.2k | 165 s | Lost both audio tasks, the chart and one code task, and burned 2× the tokens trying |
+| No web tools | 93.8% | 15.9k | 95 s | No drop, because the model already knew these 4 Wikipedia answers. The practice set's web tasks are memorizable, so they don't test retrieval; GAIA's lookups do |
+| Manager + 2 specialists | 93.8% | 30.2k | 130 s | **+47% tokens and 2.4× the latency for no accuracy gain.** At this task size, the simplest architecture wins |
+| Format verifier | 93.8% | 24.0k | 98 s | No gain. The normalizer already handles format |
+
+With 16 tasks, one task is 6.25 points, so none of these differences is statistically significant on its own (paired McNemar test; the media-tools drop has p = 0.125). They're directional evidence, and that's how they're reported here.
+
+Full per-skill breakdown: [`evals/results/ablation_2026-10-10.md`](evals/results/ablation_2026-10-10.md). The results site has every practice trajectory, step by step.
 <!-- DETAIL:END -->
 
 ## Run it

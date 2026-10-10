@@ -1,0 +1,532 @@
+{
+  "tag": "2026-10-10",
+  "created": "2026-10-10T20:46:19+00:00",
+  "set": "practice",
+  "tasks": [
+    "p01-xlsx-late-loans",
+    "p02-xlsx-multisheet-sku",
+    "p03-csv-evening-trips",
+    "p04-csv-pm25-ranking",
+    "p05-py-queue-sim",
+    "p06-py-invert-cipher",
+    "p07-audio-platform",
+    "p08-audio-mean-reading",
+    "p09-image-chess-mate",
+    "p10-image-chart-mean",
+    "p11-pdf-action-items",
+    "p12-json-top-customer",
+    "w01-wiki-element-city",
+    "w02-wiki-architect-prize",
+    "w03-wiki-bolivia-borders",
+    "w04-wiki-mozart-river"
+  ],
+  "configs": [
+    {
+      "name": "baseline",
+      "group": "reference",
+      "env": {},
+      "run_ids": [
+        "abl-2026-10-10-baseline"
+      ],
+      "status": "ok",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "n_tasks": 16,
+      "skipped": 0,
+      "accuracy": 0.9375,
+      "accuracy_strict": 0.9375,
+      "mean_steps": 3.312,
+      "mean_seconds": 54.275,
+      "mean_tokens": 20526.062,
+      "errors": 0
+    },
+    {
+      "name": "no_web",
+      "group": "tools",
+      "env": {
+        "GAIA_DISABLE_TOOLS": "web_search,visit_webpage,wikipedia_search,wikipedia_page,wikipedia_revision,wikipedia_page_info"
+      },
+      "run_ids": [
+        "abl-2026-10-10-no_web"
+      ],
+      "status": "ok",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "n_tasks": 16,
+      "skipped": 0,
+      "accuracy": 0.9375,
+      "accuracy_strict": 0.9375,
+      "mean_steps": 2.812,
+      "mean_seconds": 94.756,
+      "mean_tokens": 15939.625,
+      "errors": 1,
+      "vs_baseline": {
+        "shared_tasks": 16,
+        "delta": 0.0,
+        "baseline_only": 0,
+        "config_only": 0,
+        "mcnemar_p": 1.0
+      }
+    },
+    {
+      "name": "no_media",
+      "group": "tools",
+      "env": {
+        "GAIA_DISABLE_TOOLS": "transcribe_audio,image_question,youtube_transcript,youtube_audio_transcript,youtube_frames_question"
+      },
+      "run_ids": [
+        "abl-2026-10-10-no_media"
+      ],
+      "status": "ok",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "n_tasks": 16,
+      "skipped": 0,
+      "accuracy": 0.6875,
+      "accuracy_strict": 0.6875,
+      "mean_steps": 6.062,
+      "mean_seconds": 165.037,
+      "mean_tokens": 42224.312,
+      "errors": 1,
+      "vs_baseline": {
+        "shared_tasks": 16,
+        "delta": -0.25,
+        "baseline_only": 4,
+        "config_only": 0,
+        "mcnemar_p": 0.125
+      }
+    },
+    {
+      "name": "arch_multi",
+      "group": "architecture",
+      "env": {
+        "GAIA_ARCH": "multi"
+      },
+      "run_ids": [
+        "abl-2026-10-10-arch_multi"
+      ],
+      "status": "ok",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "n_tasks": 16,
+      "skipped": 0,
+      "accuracy": 0.9375,
+      "accuracy_strict": 0.9375,
+      "mean_steps": 2.75,
+      "mean_seconds": 129.575,
+      "mean_tokens": 30158.562,
+      "errors": 1,
+      "vs_baseline": {
+        "shared_tasks": 16,
+        "delta": 0.0,
+        "baseline_only": 0,
+        "config_only": 0,
+        "mcnemar_p": 1.0
+      }
+    },
+    {
+      "name": "verify",
+      "group": "architecture",
+      "env": {
+        "GAIA_VERIFY": "1"
+      },
+      "run_ids": [
+        "abl-2026-10-10-verify"
+      ],
+      "status": "ok",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "n_tasks": 16,
+      "skipped": 0,
+      "accuracy": 0.9375,
+      "accuracy_strict": 0.9375,
+      "mean_steps": 3.375,
+      "mean_seconds": 98.481,
+      "mean_tokens": 24048.438,
+      "errors": 1,
+      "vs_baseline": {
+        "shared_tasks": 16,
+        "delta": 0.0,
+        "baseline_only": 0,
+        "config_only": 0,
+        "mcnemar_p": 1.0
+      }
+    }
+  ],
+  "per_task": {
+    "baseline": {
+      "p01-xlsx-late-loans": 1.0,
+      "p02-xlsx-multisheet-sku": 1.0,
+      "p03-csv-evening-trips": 1.0,
+      "p04-csv-pm25-ranking": 1.0,
+      "p05-py-queue-sim": 1.0,
+      "p06-py-invert-cipher": 1.0,
+      "p07-audio-platform": 1.0,
+      "p08-audio-mean-reading": 1.0,
+      "p09-image-chess-mate": 0.0,
+      "p10-image-chart-mean": 1.0,
+      "p11-pdf-action-items": 1.0,
+      "p12-json-top-customer": 1.0,
+      "w01-wiki-element-city": 1.0,
+      "w02-wiki-architect-prize": 1.0,
+      "w03-wiki-bolivia-borders": 1.0,
+      "w04-wiki-mozart-river": 1.0
+    },
+    "no_web": {
+      "p01-xlsx-late-loans": 1.0,
+      "p02-xlsx-multisheet-sku": 1.0,
+      "p03-csv-evening-trips": 1.0,
+      "p04-csv-pm25-ranking": 1.0,
+      "p05-py-queue-sim": 1.0,
+      "p06-py-invert-cipher": 1.0,
+      "p07-audio-platform": 1.0,
+      "p08-audio-mean-reading": 1.0,
+      "p09-image-chess-mate": 0.0,
+      "p10-image-chart-mean": 1.0,
+      "p11-pdf-action-items": 1.0,
+      "p12-json-top-customer": 1.0,
+      "w01-wiki-element-city": 1.0,
+      "w02-wiki-architect-prize": 1.0,
+      "w03-wiki-bolivia-borders": 1.0,
+      "w04-wiki-mozart-river": 1.0
+    },
+    "no_media": {
+      "p01-xlsx-late-loans": 1.0,
+      "p02-xlsx-multisheet-sku": 1.0,
+      "p03-csv-evening-trips": 1.0,
+      "p04-csv-pm25-ranking": 1.0,
+      "p05-py-queue-sim": 1.0,
+      "p06-py-invert-cipher": 0.0,
+      "p07-audio-platform": 0.0,
+      "p08-audio-mean-reading": 0.0,
+      "p09-image-chess-mate": 0.0,
+      "p10-image-chart-mean": 0.0,
+      "p11-pdf-action-items": 1.0,
+      "p12-json-top-customer": 1.0,
+      "w01-wiki-element-city": 1.0,
+      "w02-wiki-architect-prize": 1.0,
+      "w03-wiki-bolivia-borders": 1.0,
+      "w04-wiki-mozart-river": 1.0
+    },
+    "arch_multi": {
+      "p01-xlsx-late-loans": 1.0,
+      "p02-xlsx-multisheet-sku": 1.0,
+      "p03-csv-evening-trips": 1.0,
+      "p04-csv-pm25-ranking": 1.0,
+      "p05-py-queue-sim": 1.0,
+      "p06-py-invert-cipher": 1.0,
+      "p07-audio-platform": 1.0,
+      "p08-audio-mean-reading": 1.0,
+      "p09-image-chess-mate": 0.0,
+      "p10-image-chart-mean": 1.0,
+      "p11-pdf-action-items": 1.0,
+      "p12-json-top-customer": 1.0,
+      "w01-wiki-element-city": 1.0,
+      "w02-wiki-architect-prize": 1.0,
+      "w03-wiki-bolivia-borders": 1.0,
+      "w04-wiki-mozart-river": 1.0
+    },
+    "verify": {
+      "p01-xlsx-late-loans": 1.0,
+      "p02-xlsx-multisheet-sku": 1.0,
+      "p03-csv-evening-trips": 1.0,
+      "p04-csv-pm25-ranking": 1.0,
+      "p05-py-queue-sim": 1.0,
+      "p06-py-invert-cipher": 1.0,
+      "p07-audio-platform": 1.0,
+      "p08-audio-mean-reading": 1.0,
+      "p09-image-chess-mate": 0.0,
+      "p10-image-chart-mean": 1.0,
+      "p11-pdf-action-items": 1.0,
+      "p12-json-top-customer": 1.0,
+      "w01-wiki-element-city": 1.0,
+      "w02-wiki-architect-prize": 1.0,
+      "w03-wiki-bolivia-borders": 1.0,
+      "w04-wiki-mozart-river": 1.0
+    }
+  },
+  "per_skill": {
+    "alphabetical": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "argmax": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "2/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "arithmetic": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "0/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "chart-reading": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "0/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "chess": {
+      "baseline": "0/1",
+      "no_web": "0/1",
+      "no_media": "0/1",
+      "arch_multi": "0/1",
+      "verify": "0/1"
+    },
+    "code-execution": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "code-reasoning": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "0/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "count": {
+      "baseline": "3/3",
+      "no_web": "3/3",
+      "no_media": "3/3",
+      "arch_multi": "3/3",
+      "verify": "3/3"
+    },
+    "date-arithmetic": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "date-comparison": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "datetime": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "distractors": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "0/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "entity": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "file:audio": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "0/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "file:csv": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "2/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "file:image": {
+      "baseline": "1/2",
+      "no_web": "1/2",
+      "no_media": "0/2",
+      "arch_multi": "1/2",
+      "verify": "1/2"
+    },
+    "file:json": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "file:pdf": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "file:py": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "1/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "file:xlsx": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "2/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "filter": {
+      "baseline": "4/4",
+      "no_web": "4/4",
+      "no_media": "4/4",
+      "arch_multi": "4/4",
+      "verify": "4/4"
+    },
+    "group-by": {
+      "baseline": "3/3",
+      "no_web": "3/3",
+      "no_media": "3/3",
+      "arch_multi": "3/3",
+      "verify": "3/3"
+    },
+    "inversion": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "0/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "list": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "missing-values": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "modify-parameters": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "multi-hop": {
+      "baseline": "3/3",
+      "no_web": "3/3",
+      "no_media": "3/3",
+      "arch_multi": "3/3",
+      "verify": "3/3"
+    },
+    "multi-sheet": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "near-miss-names": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "nested-data": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "number": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "ordered-list": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "2/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "ranking": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "rounding": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "0/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    },
+    "strict-bound": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "2/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "transcription": {
+      "baseline": "2/2",
+      "no_web": "2/2",
+      "no_media": "0/2",
+      "arch_multi": "2/2",
+      "verify": "2/2"
+    },
+    "verification": {
+      "baseline": "0/1",
+      "no_web": "0/1",
+      "no_media": "0/1",
+      "arch_multi": "0/1",
+      "verify": "0/1"
+    },
+    "vision": {
+      "baseline": "1/2",
+      "no_web": "1/2",
+      "no_media": "0/2",
+      "arch_multi": "1/2",
+      "verify": "1/2"
+    },
+    "web": {
+      "baseline": "4/4",
+      "no_web": "4/4",
+      "no_media": "4/4",
+      "arch_multi": "4/4",
+      "verify": "4/4"
+    },
+    "wikipedia": {
+      "baseline": "4/4",
+      "no_web": "4/4",
+      "no_media": "4/4",
+      "arch_multi": "4/4",
+      "verify": "4/4"
+    },
+    "year": {
+      "baseline": "1/1",
+      "no_web": "1/1",
+      "no_media": "1/1",
+      "arch_multi": "1/1",
+      "verify": "1/1"
+    }
+  }
+}
