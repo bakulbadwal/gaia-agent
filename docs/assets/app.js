@@ -1642,7 +1642,7 @@
 
     dgBox(svg, { x: 20, y: 40, w: 190, h: 64, cls: "accent", t: "Course API", s: ["GET /questions · /files"] });
     dgBox(svg, { x: 20, y: 170, w: 190, h: 84, t: "run.py", s: ["cache · resume", "per-question timeout"] });
-    dgBox(svg, { x: 280, y: 70, w: 200, h: 70, cls: "accent", t: "Model", s: ["free tier · OpenAI-compatible"] });
+    dgBox(svg, { x: 280, y: 70, w: 200, h: 70, cls: "accent", t: "Model", s: ["open-weight · free tier"] });
     dgBox(svg, { x: 520, y: 70, w: 200, h: 70, cls: "plan", t: "Thought + Python", s: ["one code action per step"] });
     dgBox(svg, { x: 520, y: 230, w: 200, h: 70, t: "Python executor", s: ["authorized imports only"] });
     dgBox(svg, { x: 280, y: 230, w: 200, h: 70, t: "Observation", s: ["printed output · errors"] });

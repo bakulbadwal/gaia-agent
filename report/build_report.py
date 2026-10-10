@@ -54,7 +54,7 @@ ASSETS = HERE / "assets"
 
 PROJECT = "GAIA Agent — HF Agents Course Unit 4"
 PITCH = (
-    "A smolagents CodeAgent on free models that answers GAIA Level-1 questions "
+    "A smolagents CodeAgent on free, open-weight models that answers GAIA Level-1 questions "
     "with web, Wikipedia, file, audio, image and video tools, and records every "
     "step it takes so each answer can be audited."
 )

@@ -1,13 +1,13 @@
 # GAIA Agent
 
-**A research agent, with the tracing, evals and reliability work it takes to trust one.** Built for the final assignment (Unit 4) of the [Hugging Face Agents Course](https://huggingface.co/learn/agents-course): 20 Level-1 questions from the [GAIA benchmark](https://huggingface.co/papers/2311.12983), graded by exact match. It runs entirely on **free models**.
+**A research agent, with the tracing, evals and reliability work it takes to trust one.** Built for the final assignment (Unit 4) of the [Hugging Face Agents Course](https://huggingface.co/learn/agents-course): 20 Level-1 questions from the [GAIA benchmark](https://huggingface.co/papers/2311.12983), graded by exact match. It runs entirely on **free, open-weight models**: every model it uses has its weights published on Hugging Face.
 
 <!-- RESULTS:START -->
 | | |
 |---|---|
 | **Official score** (course API, 20 GAIA L1 questions) | **85% (17 / 20)**: the certificate bar is 30% |
 | **Practice set** (16 original tasks, 4 identical runs) | **95.3% mean accuracy · pass@4 100% · pass^4 93.8%** |
-| **Model cost** | **$0**: free OpenRouter models only, enforced in code |
+| **Models · cost** | **Open-weight only** (NVIDIA Nemotron 3 Ultra, Nemotron 3 Nano Omni, dots-3), served free via OpenRouter: **$0**, enforced in code |
 <!-- RESULTS:END -->
 
 **Results site:** step-by-step replays of every practice task, tool usage, latency, failure tags and ablations: **[bakulbadwal.github.io/gaia-agent](https://bakulbadwal.github.io/gaia-agent/)**
@@ -30,7 +30,7 @@ Most Unit 4 submissions are one agent, one run and one score. This project treat
 | **Its own eval suite** | A 16-task practice set I wrote, with verifiable gold answers and input files built from scratch (spreadsheets, CSV, JSON, PDF, audio, a chess diagram, Python files, multi-hop Wikipedia). It is scored with a line-for-line port of GAIA's official quasi-exact scorer. | The course API returns one number and never says which answers were right. A local set with known answers is the only way to improve without overfitting the benchmark. |
 | **Reliability, not just accuracy** | Every task is run 3 times, and the report shows **pass@k** (solved at least once) and **pass^k** (solved every time). | A demo needs one lucky run. A deployment needs pass^k. The gap between the two numbers is where the flakiness hides. |
 | **Ablations** | The same set is re-run with web tools removed, media tools removed, a manager + specialists architecture, and a format-verifier pass. | It shows what each piece is actually worth, instead of asserting it. |
-| **Running on free models** | A token-bucket rate limiter and a daily request budget. Backoff that respects `Retry-After`. Fallback chains when a model returns an empty reply or a 429. A per-call usage log. A **`:free`-only guard** that refuses any billable model id before a request is sent. | Free tiers are flaky. This is the plumbing that turns flaky into finishes. |
+| **Running on free endpoints** | A token-bucket rate limiter and a daily request budget. Backoff that respects `Retry-After`. Fallback chains when a model returns an empty reply or a 429. A per-call usage log. A **`:free`-only guard** that refuses any billable model id before a request is sent. | Free tiers are flaky. This is the plumbing that turns flaky into finishes. |
 | **Contamination policy** | A guard in the agent's web tools blocks GAIA answer pages, and nothing is hard-coded. The public repo and site never publish the GAIA questions or the agent's answers to them, because the dataset asks that its items not be reshared in crawlable form. | A score is only worth something if it wasn't looked up. |
 
 ## How it works
@@ -53,7 +53,7 @@ flowchart LR
 - **The agent** is a smolagents 1.26 `CodeAgent`. It acts by writing Python, so it can loop, filter a DataFrame and call three tools in one step, instead of one JSON tool call per round trip. The system prompt carries GAIA's answer rules: numbers without units or separators, minimal strings, comma lists, and the question's own format instructions.
 - **Multi-agent mode** (`GAIA_ARCH=multi`) uses a manager that delegates to a `web_researcher` and a `media_analyst`, each with only its own tools.
 - **Verifier mode** (`GAIA_VERIFY=1`) adds one extra call that may only *reformat* the answer, never re-research it. Its output is accepted only if it passes a pure-reformat check.
-- **Models:** NVIDIA Nemotron 3 Ultra (free) for reasoning; Nemotron Nano Omni or dots-3 (free) for images and video frames. Each falls back to the next free model in its chain.
+- **Models (all open-weight):** NVIDIA [Nemotron 3 Ultra](https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16) (550B total, 55B active) for reasoning; [Nemotron 3 Nano Omni](https://huggingface.co/nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning-BF16) or [dots-3](https://huggingface.co/dots-studio/dots3-note-prev) for images and video frames. They're served free through OpenRouter, and each falls back to the next free model in its chain. Anyone could self-host the exact same weights.
 
 ### Tools (13)
 
@@ -69,7 +69,7 @@ flowchart LR
 ## Results
 
 <!-- DETAIL:START -->
-All runs are from 2026-10-10 and used free OpenRouter models only. Total model spend: **$0.00**.
+All runs are from 2026-10-10 and used free, open-weight models only (served via OpenRouter). Total model spend: **$0.00**.
 
 ### Official GAIA score: 85% (17 / 20)
 
@@ -148,7 +148,7 @@ app.py        Hugging Face Space (the course template, wired to this agent)
 | Decision | Why | Trade-off |
 |---|---|---|
 | **CodeAgent over JSON tool calls** | Code can filter, loop and combine tools in one step, so there are fewer round trips on a rate-limited free tier ([Wang et al., 2024](https://huggingface.co/papers/2402.01030)). | Running model-written code needs a sandbox: smolagents' restricted executor, a code-level network guard, and timeouts. |
-| **Free models only** | Shows the agent design carrying the result, not a frontier model. | Free endpoints return empty replies and 429s, so the fallback chains do real work, and the score has a lower ceiling. |
+| **Free, open-weight models only** | Shows the agent design carrying the result, not a frontier API, and keeps it reproducible: the weights are public. | Free endpoints return empty replies and 429s, so the fallback chains do real work, and the score has a lower ceiling. |
 | **Local Whisper for audio** | Free, private, and cached. | CPU transcription is slower than an API. |
 | **Fix timeouts once, generally** | The live test found that smolagents' 30 s code-step timeout was silently throwing away slow-but-successful tool calls. The fix raised the limit for every step (300 s; 1,200 s for a manager waiting on a specialist), bounded by a per-question watchdog. | A truly stuck step takes longer to cut off. |
 | **Redacted public results** | GAIA asks that its items not be reshared, so they aren't. | The public GAIA trajectories show only each step's skeleton. Full replays are shown for the practice set instead. |
