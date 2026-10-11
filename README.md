@@ -91,6 +91,8 @@ The course API returns only an aggregate score, so it doesn't reveal which three
 |---|---|---|---|---|---|---|
 | Accuracy | 100% | 93.8% | 93.8% | 93.8% | **100%** | **93.8%** |
 
+The 16 practice tasks, their input files and gold answers are published as a dataset: **[bacool/gaia-agent-practice-set](https://huggingface.co/datasets/bacool/gaia-agent-practice-set)**.
+
 Run 4 is the ablation's baseline: the same configuration, run again. 15 of 16 tasks were solved on every run. The only flaky one was reading a chess diagram (1 of 4). pass^k (all k runs correct) is the number that matters if someone depends on the agent.
 
 ### Ablations: what each piece is worth
