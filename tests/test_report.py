@@ -18,6 +18,10 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 FIXTURE = ROOT / "tests" / "fixtures" / "sample_run"
+# The generated runs/ tree is gitignored (it matches the repo-wide runs/ rule), so build it
+# on a fresh clone. make_fixture.py is deterministic and writes next to itself.
+if not (FIXTURE / "runs").exists():
+    subprocess.run([sys.executable, str(FIXTURE / "make_fixture.py")], check=True, cwd=FIXTURE)
 sys.path.insert(0, str(ROOT / "report"))
 
 import build_report as br  # noqa: E402

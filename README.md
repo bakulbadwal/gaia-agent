@@ -95,6 +95,8 @@ The 16 practice tasks, their input files and gold answers are published as a dat
 
 Run 4 is the ablation's baseline: the same configuration, run again. 15 of 16 tasks were solved on every run. The only flaky one was reading a chess diagram (1 of 4). pass^k (all k runs correct) is the number that matters if someone depends on the agent.
 
+**Reliability case study** (which task flips, why, and what to fix next): [`docs/RELIABILITY.md`](docs/RELIABILITY.md)
+
 ### Ablations: what each piece is worth
 
 | Config | Accuracy | Tokens / task | Time / task | Takeaway |
@@ -122,7 +124,7 @@ python submit.py --yes                          # submit to the course API
 python evals/run_practice.py --repeat 3         # practice set, scored, pass^k
 python evals/ablate.py                          # ablation table
 python report/build_report.py                   # rebuild the results site (public redaction is on by default)
-python -m pytest -q -m "not network"            # 396 offline tests
+python -m pytest -q -m "not network"            # 418 offline tests
 ```
 
 | Setting | Effect |
@@ -141,7 +143,7 @@ gaia_agent/   agent, tools_web, tools_media, providers (+ presets), trace, files
 evals/        scorer (GAIA port), practice set + generator, run_practice, passk, ablate, configs
 analysis/     error_analysis: automatic failure tags per trace
 report/       static results-site generator  →  docs/ (GitHub Pages)
-tests/        396 offline + 18 network tests
+tests/        418 offline + 18 network tests
 app.py        Hugging Face Space (the course template, wired to this agent)
 ```
 
