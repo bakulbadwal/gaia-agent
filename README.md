@@ -95,6 +95,8 @@ The 16 practice tasks, their input files and gold answers are published as a dat
 
 Run 4 is the ablation's baseline: the same configuration, run again. 15 of 16 tasks were solved on every run. The only flaky one was reading a chess diagram (1 of 4). pass^k (all k runs correct) is the number that matters if someone depends on the agent.
 
+**Reliability case study** (which task flips, why, and what to fix next): [`docs/RELIABILITY.md`](docs/RELIABILITY.md)
+
 ### Ablations: what each piece is worth
 
 | Config | Accuracy | Tokens / task | Time / task | Takeaway |
