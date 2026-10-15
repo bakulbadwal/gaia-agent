@@ -168,6 +168,7 @@ this as follows:
 
 ## 6. Status
 
-This directory holds the instrument, not results. Nothing in `results/` is committed until a
-run has happened. Any accuracy quoted in the project README must name its run id, so the claim
-can be traced to a file.
+`results/` holds the redacted, aggregate results of the committed runs (raw run data stays in
+the gitignored `results/raw/`). Any accuracy quoted in the project README must name its run id,
+so the claim can be traced to a file. [`docs/RELIABILITY.md`](../docs/RELIABILITY.md) recomputes
+the pass^k numbers from these files.

@@ -124,7 +124,7 @@ python submit.py --yes                          # submit to the course API
 python evals/run_practice.py --repeat 3         # practice set, scored, pass^k
 python evals/ablate.py                          # ablation table
 python report/build_report.py                   # rebuild the results site (public redaction is on by default)
-python -m pytest -q -m "not network"            # 396 offline tests
+python -m pytest -q -m "not network"            # 418 offline tests
 ```
 
 | Setting | Effect |
@@ -143,7 +143,7 @@ gaia_agent/   agent, tools_web, tools_media, providers (+ presets), trace, files
 evals/        scorer (GAIA port), practice set + generator, run_practice, passk, ablate, configs
 analysis/     error_analysis: automatic failure tags per trace
 report/       static results-site generator  →  docs/ (GitHub Pages)
-tests/        396 offline + 18 network tests
+tests/        418 offline + 18 network tests
 app.py        Hugging Face Space (the course template, wired to this agent)
 ```
 
